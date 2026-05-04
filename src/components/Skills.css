@@ -1,0 +1,106 @@
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.skill-card {
+    padding: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: #181818;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-glow:hover {
+    transform: scale(1.04);
+    background: #282828;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(29, 185, 84, 0.3);
+}
+
+.skill-icon-container {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.real-skill-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    filter: brightness(1.2); /* General brightening */
+}
+
+/* Specific filter for dark icons to make them white/visible */
+.real-skill-icon[alt="RAG"] {
+    filter: brightness(1.2);
+}
+
+.real-skill-icon[alt="LangChain"] {
+    filter: brightness(1.5);
+}
+
+.real-skill-icon[alt="MLOps"] {
+    filter: brightness(2) saturate(1.5);
+}
+
+.real-skill-icon[alt="Computer Vision"] {
+    filter: brightness(1.2);
+}
+
+.real-skill-icon[alt="Google Gemini"] {
+    filter: brightness(1.5) saturate(1.5);
+}
+
+.skill-card:hover .skill-icon-container {
+    background: rgba(99, 102, 241, 0.1);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.skill-card:hover .real-skill-icon {
+    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
+}
+
+.skill-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-title {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.skill-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}

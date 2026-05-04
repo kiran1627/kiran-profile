@@ -1,0 +1,158 @@
+:root {
+  --bg-color: #080808;
+  --accent-color: #6366f1; /* Electric Indigo */
+  --accent-hover: #818cf8;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+  --card-bg: rgba(18, 18, 18, 0.7);
+  --card-hover-bg: #222222;
+  --glass-bg: rgba(12, 12, 12, 0.8);
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --nav-height: 80px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+ul {
+  list-style: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+.section-container {
+  padding: 100px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 60vh;
+}
+
+.heading-primary {
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.heading-secondary {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--text-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.heading-secondary::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--accent-color);
+  margin: 1rem auto;
+  border-radius: 2px;
+}
+
+.text-sub {
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  max-width: 700px;
+}
+
+/* Glassmorphism */
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  background: var(--card-hover-bg);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Base button styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: var(--accent-color);
+  color: black;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 500px; /* Pill shape like Spotify */
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  transform: scale(1.04);
+  box-shadow: 0 8px 20px rgba(29, 185, 84, 0.3);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 768px) {
+  .section-container {
+    padding: 60px 20px;
+  }
+}
