@@ -53,20 +53,22 @@ const techIcons = [
 ];
 
 const BackgroundIcons = ({ count = 60 }) => {
-    const icons = React.useMemo(() => {
-        // Use more variety from the techIcons list
+    const [icons, setIcons] = React.useState([]);
+
+    React.useEffect(() => {
+        // Generate random icons only once on mount
         const shuffled = [...techIcons].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, Math.min(count, techIcons.length)).map((item) => ({
+        const selected = shuffled.slice(0, Math.min(count, techIcons.length)).map((item) => ({
             ...item,
             randomTop: `${Math.random() * 100}%`,
             randomLeft: `${Math.random() * 100}%`,
-            randomDuration: 15 + Math.random() * 20, // Much slower, smoother movement
-            randomDelay: -Math.random() * 20, // Negative delay to start mid-animation
-            // Random floating paths
+            randomDuration: 15 + Math.random() * 20,
+            randomDelay: -Math.random() * 20,
             pathX: [0, (Math.random() - 0.5) * 150, (Math.random() - 0.5) * 150, 0],
             pathY: [0, (Math.random() - 0.5) * 150, (Math.random() - 0.5) * 150, 0],
             rot: [0, 360 * (Math.random() > 0.5 ? 1 : -1)]
         }));
+        setIcons(selected);
     }, [count]);
 
     return (
