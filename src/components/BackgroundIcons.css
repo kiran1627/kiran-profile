@@ -9,30 +9,25 @@
     z-index: 0;
 }
 
-.tech-icon-img-bright {
+.tech-icon-img-continuous {
     position: absolute;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.25; /* Brightened from 0.15 */
-    filter: blur(0.5px) saturate(1.2); /* Reduced blur and increased saturation */
-    transition: opacity 0.3s ease, filter 0.3s ease;
+    opacity: 0.25; /* Increased visibility as requested */
+    filter: blur(0.5px) saturate(1.1);
+    transition: opacity 0.5s ease;
 }
 
-.tech-icon-img-bright img {
+.tech-icon-img-continuous img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.tech-icon-img-bright:hover {
-    opacity: 0.6;
-    filter: blur(0px) saturate(1.5);
-}
-
 @media (max-width: 768px) {
-    .tech-icon-img-bright {
-        opacity: 0.15;
-        width: 30px !important;
-        height: 30px !important;
+    .tech-icon-img-continuous {
+        opacity: 0.2;
+        width: 25px !important;
+        height: 25px !important;
     }
 }

@@ -1,10 +1,11 @@
+'use client';
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { Play } from 'lucide-react';
 import { useScrollAnimation, fadeInUp, staggerContainer, slideInLeft } from '../hooks/useScrollAnimation';
 import { projectsInfo } from '../projectsInfo';
-import BackgroundIcons from './BackgroundIcons';
 import './Projects.css';
 
 const projectsData = [
@@ -60,8 +61,7 @@ const Projects = () => {
             animate={controls}
             variants={fadeInUp}
         >
-            <BackgroundIcons count={8} />
-            <motion.h2 className="heading-secondary" variants={fadeInUp}>Listen to my Work</motion.h2>
+            <motion.h2 className="heading-secondary" variants={fadeInUp}>Featured Projects & Demos</motion.h2>
             <motion.div
                 className="projects-grid"
                 variants={staggerContainer}

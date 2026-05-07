@@ -1,32 +1,46 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleUp } from '../hooks/useScrollAnimation';
-import {
-    SiPython, SiPytorch, SiTensorflow, SiHuggingface, SiOpenai, SiStreamlit, SiFastapi
+import { 
+    SiPython, SiPytorch, SiTensorflow, SiHuggingface, SiOpenai, 
+    SiFastapi, SiStreamlit, SiReact, 
+    SiGithub, SiMongodb, SiPostgresql, SiOpencv,
+    SiGooglecloud
 } from 'react-icons/si';
-import { FaRobot, FaBrain, FaGitAlt, FaCogs, FaUsers, FaLightbulb } from 'react-icons/fa';
-import { BsDatabaseCheck, BsKanban, BsChatDots } from 'react-icons/bs';
-import { BiMicrochip } from 'react-icons/bi';
-import BackgroundIcons from './BackgroundIcons';
+import { FaBrain, FaRobot, FaSearch, FaTerminal, FaInfinity, FaDatabase, FaAws, FaNodeJs, FaChartBar } from 'react-icons/fa';
+import { VscAzure } from 'react-icons/vsc';
+import { HiSparkles } from 'react-icons/hi';
+import { GiCircuitry } from 'react-icons/gi';
 import './Skills.css';
 
 const skillsData = [
-    { name: 'Python', desc: 'Core language for AI scripting, automation, and ML model development.', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-    { name: 'PyTorch', desc: 'Training deep learning models, GANs, and custom LLMs.', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg' },
-    { name: 'TensorFlow', desc: 'End-to-end deep learning workflows for GenAI applications.', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg' },
-    { name: 'Hugging Face', desc: 'Transformers, tokenization, fine-tuning, and deployment.', icon: 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg' },
-    { name: 'LangChain', desc: 'Building agents, tools, and RAG pipelines with LLMs.', icon: 'https://cdn.simpleicons.org/langchain' },
-    { name: 'RAG', desc: 'Chunking, vector embeddings, and semantic retrieval for grounding LLMs.', icon: 'https://img.icons8.com/ios-filled/100/ffffff/database.png' },
-    { name: 'Prompt Engineering', desc: 'Designing effective prompts for zero-shot and CoT tasks.', icon: 'https://cdn-icons-png.flaticon.com/512/2103/2103633.png' },
-    { name: 'Streamlit', desc: 'Deploying interactive GenAI prototypes and demos quickly.', icon: 'https://cdn.simpleicons.org/streamlit' },
-    { name: 'FastAPI', desc: 'Serving GenAI models with APIs and webhooks.', icon: 'https://cdn.simpleicons.org/fastapi' },
-    { name: 'Google Gemini', desc: 'Hands-on with Google\'s Gemini multimodal LLMs and APIs.', icon: 'https://cdn.simpleicons.org/googlegemini' },
-    { name: 'Computer Vision', desc: 'OpenCV, text-to-image models, and vision transformers.', icon: 'https://cdn.simpleicons.org/opencv' },
-    { name: 'Git & GitHub', desc: 'CI/CD, version control, and collaborative workflows.', icon: 'https://cdn.simpleicons.org/github' },
-    { name: 'MLOps', desc: 'Model deployment, monitoring, and lifecycle management (MLflow).', icon: 'https://cdn.simpleicons.org/mlflow' },
-    { name: 'Node.js', desc: 'Backend development and server-side scripting.', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-    { name: 'MongoDB', desc: 'Database management and unstructured data storage.', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
-    { name: 'Creative Problem Solving', desc: 'Innovating generative AI use-cases and solving ambiguity.', icon: 'https://cdn-icons-png.flaticon.com/512/2103/2103444.png' }
+    { name: 'Python', desc: 'Core language for AI scripting, automation, and ML model development.', Icon: SiPython, color: '#3776AB' },
+    { name: 'PyTorch', desc: 'Training deep learning models, GANs, and custom LLMs.', Icon: SiPytorch, color: '#EE4C2C' },
+    { name: 'TensorFlow', desc: 'End-to-end deep learning workflows for GenAI applications.', Icon: SiTensorflow, color: '#FF6F00' },
+    { name: 'Hugging Face', desc: 'Transformers, tokenization, fine-tuning, and deployment.', Icon: SiHuggingface, color: '#FFD21E' },
+    { name: 'OpenAI', desc: 'Working with GPT-4, DALL-E, and advanced API integrations.', Icon: SiOpenai, color: '#00A67E' },
+    { name: 'Google Gemini', desc: 'Expertise in building multimodal AI applications using Gemini Pro and Flash.', Icon: HiSparkles, color: '#8E75FF' },
+    { name: 'LLM Fine-tuning', desc: 'Expertise in LoRA, QLoRA, and instruction tuning for custom models.', Icon: FaBrain, color: '#3B82F6' },
+    { name: 'Vector Databases', desc: 'Working with Pinecone, ChromaDB, and Milvus for RAG systems.', Icon: FaDatabase, color: '#3B82F6' },
+    { name: 'LangChain', desc: 'Building complex AI agents, tools, and RAG pipelines.', Icon: GiCircuitry, color: '#00A67E' },
+    { name: 'RAG Pipelines', desc: 'Advanced semantic search, chunking strategies, and retrieval grounding.', Icon: FaSearch, color: '#3B82F6' },
+    { name: 'AI Agents', desc: 'Developing autonomous agents using frameworks like CrewAI and AutoGen.', Icon: FaRobot, color: '#3B82F6' },
+    { name: 'Computer Vision', desc: 'YOLOv10, OpenCV, and vision transformers for real-time detection.', Icon: SiOpencv, color: '#5C3EE8' },
+    { name: 'FastAPI', desc: 'High-performance API development for serving ML models.', Icon: SiFastapi, color: '#05998B' },
+    { name: 'Prompt Engineering', desc: 'Advanced techniques like Chain-of-Thought and Few-shot prompting.', Icon: FaTerminal, color: '#3B82F6' },
+    { name: 'MLOps', desc: 'CI/CD for ML, model monitoring, and lifecycle management.', Icon: FaInfinity, color: '#3B82F6' },
+    { name: 'Streamlit', desc: 'Rapid prototyping for AI/ML dashboards and demos.', Icon: SiStreamlit, color: '#FF4B4B' },
+    { name: 'React', desc: 'Building modern, interactive UIs for AI applications.', Icon: SiReact, color: '#61DAFB' },
+    { name: 'Node.js', desc: 'Scalable backend development for AI-integrated web services.', Icon: FaNodeJs, color: '#339933' },
+    { name: 'Azure Cloud', desc: 'Deploying and managing AI services on Microsoft Azure platform.', Icon: VscAzure, color: '#0078D4' },
+    { name: 'AWS Cloud', desc: 'Deploying models on AWS Bedrock and enterprise cloud infrastructure.', Icon: FaAws, color: '#FF9900' },
+    { name: 'Power BI', desc: 'Advanced data visualization and business intelligence reporting.', Icon: FaChartBar, color: '#F2C811' },
+    { name: 'PostgreSQL', desc: 'Structured data management for relational datasets.', Icon: SiPostgresql, color: '#336791' },
+    { name: 'MongoDB', desc: 'NoSQL database for flexible, document-based data storage.', Icon: SiMongodb, color: '#47A248' },
+    { name: 'GCP Cloud', desc: 'Expertise in Google Cloud Platform services, Vertex AI, and cloud scaling.', Icon: SiGooglecloud, color: '#4285F4' },
+    { name: 'GitHub', desc: 'Collaborative development and source code management.', Icon: SiGithub, color: '#FFFFFF' }
 ];
 
 const Skills = () => {
@@ -42,7 +56,6 @@ const Skills = () => {
             animate={controls}
             variants={fadeInUp}
         >
-            <BackgroundIcons count={6} />
             <motion.h2 className="heading-secondary" variants={fadeInUp}>Core Strengths & Technical Skills</motion.h2>
             <motion.div
                 className="skills-grid"
@@ -51,7 +64,10 @@ const Skills = () => {
                 {skillsData.map((skill, index) => (
                     <motion.div key={index} className="skill-card glass hover-glow" variants={scaleUp}>
                         <div className="skill-icon-container">
-                            <img src={skill.icon} alt={skill.name} className="real-skill-icon" />
+                            <skill.Icon 
+                                className="real-skill-icon-svg" 
+                                style={{ color: skill.color }}
+                            />
                         </div>
                         <div className="skill-content">
                             <h3 className="skill-title">{skill.name}</h3>

@@ -4,19 +4,6 @@
   background-color: var(--bg-color);
 }
 
-.bg-grain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.05;
-  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  filter: contrast(170%) brightness(1000%);
-}
-
 .bg-glow {
   position: fixed;
   top: 0;
@@ -26,12 +13,6 @@
   pointer-events: none;
   z-index: 0;
   background: 
-    radial-gradient(circle at 20% 20%, rgba(29, 185, 84, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(128, 0, 128, 0.05) 0%, transparent 40%);
-  animation: bg-float 20s infinite alternate ease-in-out;
-}
-
-@keyframes bg-float {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
+    radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(59, 130, 246, 0.01) 0%, transparent 50%);
 }

@@ -1,42 +1,96 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import './BackgroundIcons.css';
 
 const techIcons = [
-    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', top: '15%', left: '10%', delay: 0, size: 50 },
-    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', top: '25%', left: '85%', delay: 1, size: 45 },
-    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', top: '70%', left: '15%', delay: 2, size: 40 },
-    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', top: '65%', left: '80%', delay: 1.5, size: 45 },
-    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', top: '40%', left: '20%', delay: 0.5, size: 50 },
-    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', top: '20%', left: '75%', delay: 2.5, size: 45 },
-    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', top: '80%', left: '45%', delay: 3, size: 35 },
-    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', top: '10%', left: '50%', delay: 1.8, size: 35 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', size: 50 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', size: 50 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apollo/apollo-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg', size: 45 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg', size: 40 },
+    { url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg', size: 40 },
 ];
 
-const BackgroundIcons = ({ count = 8 }) => {
-    // We can randomize positions for different sections if needed
+const BackgroundIcons = ({ count = 60 }) => {
+    const icons = React.useMemo(() => {
+        // Use more variety from the techIcons list
+        const shuffled = [...techIcons].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, Math.min(count, techIcons.length)).map((item) => ({
+            ...item,
+            randomTop: `${Math.random() * 100}%`,
+            randomLeft: `${Math.random() * 100}%`,
+            randomDuration: 15 + Math.random() * 20, // Much slower, smoother movement
+            randomDelay: -Math.random() * 20, // Negative delay to start mid-animation
+            // Random floating paths
+            pathX: [0, (Math.random() - 0.5) * 150, (Math.random() - 0.5) * 150, 0],
+            pathY: [0, (Math.random() - 0.5) * 150, (Math.random() - 0.5) * 150, 0],
+            rot: [0, 360 * (Math.random() > 0.5 ? 1 : -1)]
+        }));
+    }, [count]);
+
     return (
         <div className="tech-icons-bg-container">
-            {techIcons.slice(0, count).map((item, index) => (
+            {icons.map((item, index) => (
                 <motion.div
                     key={index}
-                    className="tech-icon-img-bright"
+                    className="tech-icon-img-continuous"
                     style={{ 
-                        top: `${Math.random() * 90}%`, 
-                        left: `${Math.random() * 90}%`,
+                        top: item.randomTop, 
+                        left: item.randomLeft,
                         width: item.size,
                         height: item.size
                     }}
                     animate={{
-                        y: [0, -40, 0],
-                        x: [0, 20, 0],
-                        rotate: [0, 25, -25, 0],
+                        x: item.pathX,
+                        y: item.pathY,
+                        rotate: item.rot,
                     }}
                     transition={{
-                        duration: 8 + Math.random() * 4,
+                        duration: item.randomDuration,
                         repeat: Infinity,
-                        delay: Math.random() * 2,
-                        ease: "easeInOut"
+                        delay: item.randomDelay,
+                        ease: "linear" // Linear for continuous, non-stopping movement
                     }}
                 >
                     <img src={item.url} alt="tech icon" />

@@ -1,15 +1,15 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Download, Brain, Code, Cpu, Database, Sparkles, MessageSquare } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../hooks/useScrollAnimation';
-import BackgroundIcons from './BackgroundIcons';
 import './Hero.css';
 
 const Hero = () => {
     return (
         <section id="hero" className="section-container hero-section">
-            <BackgroundIcons count={8} />
 
             <motion.div
                 className="hero-content"
