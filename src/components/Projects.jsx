@@ -14,7 +14,7 @@ const projectsData = [
         desc: 'A smart system that uses AI to match blood donors with recipients based on type and location. It optimizes the donation process, improves success rates, and significantly reduces response times during emergencies.',
         tech: ['Python', 'TensorFlow', 'Flask', 'Machine Learning'],
         impact: 'Optimizes donation, improves success rates, and reduces response times.',
-        videoSrc: '/BloodDonation-demo.mp4',
+        videoSrc: '/BloodDonation-demo-compressed.mp4',
         readme: projectsInfo[0].readme,
         demoLink: projectsInfo[0].demoLink
     },
