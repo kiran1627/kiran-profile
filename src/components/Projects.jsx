@@ -128,11 +128,12 @@ const Projects = () => {
                         >
                             <button className="modal-close" onClick={() => setSelectedVideo(null)}>×</button>
                             <video
+                                key={selectedVideo}
                                 className="modal-video"
                                 controls
                                 autoPlay
                                 playsInline
-                                preload="metadata"
+                                preload="auto"
                             >
                                 <source src={selectedVideo} type="video/mp4" />
                                 Your browser does not support the video tag.
