@@ -20,7 +20,7 @@
     transform: scale(1.04);
     background: #202020;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-    border-color: rgba(59, 130, 246, 0.4);
+    border-color: var(--primary);
 }
 
 .skill-icon-container {
@@ -68,12 +68,12 @@
 }
 
 .skill-card:hover .skill-icon-container {
-    background: rgba(59, 130, 246, 0.15);
+    background: var(--primary-glow);
     transform: scale(1.1) rotate(5deg);
 }
 
 .skill-card:hover .real-skill-icon {
-    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5)) brightness(1.3);
+    filter: drop-shadow(0 0 10px var(--primary-glow)) brightness(1.3);
 }
 
 .skill-content {

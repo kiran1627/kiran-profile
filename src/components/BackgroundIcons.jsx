@@ -66,7 +66,9 @@ const BackgroundIcons = ({ count = 60 }) => {
             randomDelay: -Math.random() * 20,
             pathX: [0, (Math.random() - 0.5) * 150, (Math.random() - 0.5) * 150, 0],
             pathY: [0, (Math.random() - 0.5) * 150, (Math.random() - 0.5) * 150, 0],
-            rot: [0, 360 * (Math.random() > 0.5 ? 1 : -1)]
+            rot: [0, 360 * (Math.random() > 0.5 ? 1 : -1)],
+            rotX: [0, 360 * Math.random()],
+            rotY: [0, 360 * Math.random()]
         }));
         setIcons(selected);
     }, [count]);
@@ -77,16 +79,19 @@ const BackgroundIcons = ({ count = 60 }) => {
                 <motion.div
                     key={index}
                     className="tech-icon-img-continuous"
-                    style={{ 
-                        top: item.randomTop, 
-                        left: item.randomLeft,
-                        width: item.size,
-                        height: item.size
-                    }}
                     animate={{
                         x: item.pathX,
                         y: item.pathY,
                         rotate: item.rot,
+                        rotateX: item.rotX,
+                        rotateY: item.rotY
+                    }}
+                    style={{ 
+                        top: item.randomTop, 
+                        left: item.randomLeft,
+                        width: item.size,
+                        height: item.size,
+                        transformStyle: "preserve-3d"
                     }}
                     transition={{
                         duration: item.randomDuration,

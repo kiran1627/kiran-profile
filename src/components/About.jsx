@@ -2,32 +2,91 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useScrollAnimation, fadeInUp, scaleUp } from '../hooks/useScrollAnimation';
+import { use3DTilt } from '../hooks/use3DTilt';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 import './About.css';
 
 const About = () => {
-    const { ref, controls } = useScrollAnimation(0.2);
+    const { rotateX, rotateY, handleMouseMove, handleMouseLeave } = use3DTilt(15);
 
     return (
-        <motion.section
-            id="about"
-            className="section-container about-section"
-            style={{ position: 'relative' }}
-            ref={ref}
-            initial="hidden"
-            animate={controls}
-            variants={fadeInUp}
-        >
-            <motion.h2 className="heading-secondary" variants={fadeInUp}>About Me</motion.h2>
-            <motion.div className="about-content glass" variants={scaleUp}>
-                <p className="about-text">
-                    I am a dedicated **Generative AI Engineer** and **ML Developer** with a passion for building intelligent systems that solve real-world challenges. My expertise lies in fine-tuning large language models (LLMs), architecting RAG (Retrieval-Augmented Generation) pipelines, and developing autonomous agents that bridge the gap between cutting-edge research and scalable production applications.
-                </p>
-                <p className="about-text" style={{ marginTop: '1.5rem' }}>
-                    With a background in deep learning and natural language processing, I focus on creating efficient, impactful AI solutions. Whether it's optimizing model performance, designing robust prompt engineering strategies, or building full-stack AI-driven platforms, I strive for excellence in every line of code. My goal is to empower products with the latest advancements in AI to create more intuitive and powerful user experiences.
-                </p>
-            </motion.div>
-        </motion.section>
+        <section id="about" className="about-section" style={{ perspective: "1500px" }}>
+            <div className="about-container">
+                {/* Left Content */}
+                <div className="about-left">
+                    <span className="about-subtitle">About Us</span>
+                    <h2 className="about-title">
+                        Passion for AI/ML? Let's build something amazing together!
+                    </h2>
+                    <p className="about-desc">
+                        As a motivated AI/ML enthusiast, I specialize in building intelligent solutions
+                        using modern frameworks. I am dedicated to continuous learning and solving
+                        complex problems through data-driven approaches.
+                    </p>
+
+                    <div className="about-checklist">
+                        <div className="check-col">
+                            <div className="check-item">
+                                <CheckCircle2 size={18} className="check-icon" />
+                                <span>Generative AI & LLMs</span>
+                            </div>
+                            <div className="check-item">
+                                <CheckCircle2 size={18} className="check-icon" />
+                                <span>Machine Learning Models</span>
+                            </div>
+                        </div>
+                        <div className="check-col">
+                            <div className="check-item">
+                                <CheckCircle2 size={18} className="check-icon" />
+                                <span>Data Analysis & Visualization</span>
+                            </div>
+                            <div className="check-item">
+                                <CheckCircle2 size={18} className="check-icon" />
+                                <span>Deep Learning (PyTorch/TF)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="about-education">
+                        <div className="edu-item">
+                            <span className="edu-year">2022 - 2026</span>
+                            <div className="edu-info">
+                                <h4>Bachelor of Technology (B.Tech)</h4>
+                                <p>Specializing in AI & ML</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#skills" className="btn-more-about">
+                        <div className="icon-circle">
+                            <ArrowRight size={18} />
+                        </div>
+                        <span>More About Me</span>
+                    </a>
+                </div>
+
+                {/* Right Image */}
+                <div className="about-right">
+                    <motion.div
+                        className="image-wrapper"
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+                    >
+                        <div className="arch-frame" style={{ transform: "translateZ(50px)" }}>
+                            <img src="/profile-fixed.png" alt="About" className="about-img" />
+                        </div>
+
+                        <div className="experience-badge" style={{ transform: "translateZ(80px)" }}>
+                            <div className="exp-num">AI/ML</div>
+                            <div className="exp-text">AI/ML <br /> Enthusiast</div>
+                        </div>
+
+                        <div className="decor-circle" style={{ transform: "translateZ(-30px)" }}></div>
+                    </motion.div>
+                </div>
+            </div>
+        </section>
     );
 };
 

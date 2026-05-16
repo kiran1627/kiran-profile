@@ -1,73 +1,194 @@
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    padding: 0 60px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    height: 80px;
+}
+
+.nav-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
-    height: var(--nav-height);
-    z-index: 1000;
-    background: rgba(8, 8, 8, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.nav-brand {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 900;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: #fff;
 }
 
-.nav-brand span {
-    color: var(--accent-color);
+.logo-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+.logo-inner {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-symbol {
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #000;
 }
 
 .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 40px;
     align-items: center;
 }
 
 .nav-links a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+}
+
+/* Specific pill style for home if requested, but image shows it regular */
+.nav-links li:first-child a.active {
+    background: var(--primary);
+    color: #000;
+    padding: 8px 25px;
+    border-radius: 50px;
+}
+
+.nav-links li:first-child a.active::after {
+    display: none;
+}
+
+.arrow-down {
+    font-size: 0.8rem;
+    margin-left: 2px;
+}
+
+.btn-cv {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--primary);
+    color: #000;
+    padding: 8px 30px 8px 8px;
+    border-radius: 50px;
     font-weight: 700;
     font-size: 0.9rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    border: none;
+    transition: transform 0.3s ease;
 }
 
-.nav-links a:hover {
-    color: var(--text-primary);
+.btn-cv:hover {
+    transform: translateY(-2px);
 }
 
-.btn-resume {
-    background: var(--accent-color);
-    padding: 0.75rem 1.5rem;
-    border-radius: 500px;
-    color: black !important;
-    font-size: 0.85rem !important;
+.btn-cv .icon-circle {
+    width: 36px;
+    height: 36px;
+    background: #000;
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-resume:hover {
-    background: var(--accent-hover);
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+.mobile-toggle {
+    display: none;
+    cursor: pointer;
+    color: #fff;
+    z-index: 1001;
+    transition: transform 0.3s ease;
 }
 
-@media (max-width: 768px) {
+.mobile-only-cv {
+    display: none;
+    margin-top: 20px;
+}
+
+@media (max-width: 968px) {
+    .nav-container {
+        padding: 0 20px;
+    }
+
     .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        padding: 40px;
+    }
+
+    .nav-links.show {
+        right: 0;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .nav-actions {
         display: none;
     }
-    .navbar {
-        padding: 0 5%;
-    }
-}
 
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        /* In a full system, you'd add a hamburger menu */
+    .mobile-only-cv {
+        display: block;
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
     }
 }

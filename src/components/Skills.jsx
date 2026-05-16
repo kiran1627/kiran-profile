@@ -3,11 +3,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleUp } from '../hooks/useScrollAnimation';
+import { use3DTilt } from '../hooks/use3DTilt';
 import { 
     SiPython, SiPytorch, SiTensorflow, SiHuggingface, SiOpenai, 
     SiFastapi, SiStreamlit, SiReact, 
     SiGithub, SiMongodb, SiPostgresql, SiOpencv,
-    SiGooglecloud
+    SiGooglecloud, SiMysql
 } from 'react-icons/si';
 import { FaBrain, FaRobot, FaSearch, FaTerminal, FaInfinity, FaDatabase, FaAws, FaNodeJs, FaChartBar } from 'react-icons/fa';
 import { VscAzure } from 'react-icons/vsc';
@@ -38,10 +39,36 @@ const skillsData = [
     { name: 'AWS Cloud', desc: 'Deploying models on AWS Bedrock and enterprise cloud infrastructure.', Icon: FaAws, color: '#FF9900' },
     { name: 'Power BI', desc: 'Advanced data visualization and business intelligence reporting.', Icon: FaChartBar, color: '#F2C811' },
     { name: 'PostgreSQL', desc: 'Structured data management for relational datasets.', Icon: SiPostgresql, color: '#336791' },
+    { name: 'MySQL', desc: 'Managing and optimizing relational databases for scalable applications.', Icon: SiMysql, color: '#4479A1' },
     { name: 'MongoDB', desc: 'NoSQL database for flexible, document-based data storage.', Icon: SiMongodb, color: '#47A248' },
     { name: 'GCP Cloud', desc: 'Expertise in Google Cloud Platform services, Vertex AI, and cloud scaling.', Icon: SiGooglecloud, color: '#4285F4' },
     { name: 'GitHub', desc: 'Collaborative development and source code management.', Icon: SiGithub, color: '#FFFFFF' }
 ];
+
+const SkillCard = ({ skill }) => {
+    const { rotateX, rotateY, handleMouseMove, handleMouseLeave } = use3DTilt(15);
+    
+    return (
+        <motion.div 
+            className="skill-card glass hover-glow" 
+            variants={scaleUp}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        >
+            <div className="skill-icon-container" style={{ transform: "translateZ(30px)" }}>
+                <skill.Icon 
+                    className="real-skill-icon-svg" 
+                    style={{ color: skill.color }}
+                />
+            </div>
+            <div className="skill-content" style={{ transform: "translateZ(20px)" }}>
+                <h3 className="skill-title">{skill.name}</h3>
+                <p className="skill-desc">{skill.desc}</p>
+            </div>
+        </motion.div>
+    );
+};
 
 const Skills = () => {
     const { ref, controls } = useScrollAnimation(0.1);
@@ -50,7 +77,7 @@ const Skills = () => {
         <motion.section
             id="skills"
             className="section-container skills-section"
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', perspective: "1500px" }}
             ref={ref}
             initial="hidden"
             animate={controls}
@@ -62,18 +89,7 @@ const Skills = () => {
                 variants={staggerContainer}
             >
                 {skillsData.map((skill, index) => (
-                    <motion.div key={index} className="skill-card glass hover-glow" variants={scaleUp}>
-                        <div className="skill-icon-container">
-                            <skill.Icon 
-                                className="real-skill-icon-svg" 
-                                style={{ color: skill.color }}
-                            />
-                        </div>
-                        <div className="skill-content">
-                            <h3 className="skill-title">{skill.name}</h3>
-                            <p className="skill-desc">{skill.desc}</p>
-                        </div>
-                    </motion.div>
+                    <SkillCard key={index} skill={skill} />
                 ))}
             </motion.div>
         </motion.section>

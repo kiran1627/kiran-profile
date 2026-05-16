@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleUp } from '../hooks/useScrollAnimation';
 import Globe from './Globe';
 import './Contact.css';
-import { Mail, Github, Linkedin, MessageCircle } from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
+import { SiGithub } from 'react-icons/si';
+import { FaWhatsapp, FaLinkedin } from 'react-icons/fa';
 
 const Contact = () => {
     const { ref, controls } = useScrollAnimation(0.2);

@@ -78,8 +78,8 @@
 
 .social-icon:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--accent-color);
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    border-color: var(--primary);
+    box-shadow: 0 0 20px var(--primary-glow);
     transform: translateY(-5px);
 }
 
@@ -87,11 +87,11 @@
     width: 32px;
     height: 32px;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .social-icon:hover .real-social-icon {
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .btn-icon-img {
