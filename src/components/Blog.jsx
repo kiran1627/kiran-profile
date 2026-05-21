@@ -2,32 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Calendar, User, ArrowRight, Clock, Tag } from 'lucide-react';
+import Link from 'next/link';
+import { blogs } from '../data/blogData';
 import './Blog.css';
-
-const blogs = [
-    {
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
-        date: 'May 12, 2026',
-        author: 'Admin',
-        title: 'How Generative AI is Changing Modern Software Development',
-        desc: 'Explore the impact of LLMs on coding efficiency and the rise of autonomous development agents.'
-    },
-    {
-        image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800',
-        date: 'May 08, 2026',
-        author: 'Admin',
-        title: 'Building Efficient RAG Pipelines with LangChain and Pinecone',
-        desc: 'A deep dive into architecting retrieval-augmented systems for high-performance AI applications.'
-    },
-    {
-        image: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&q=80&w=800',
-        date: 'May 05, 2026',
-        author: 'Admin',
-        title: 'Top 5 Machine Learning Trends to Watch in 2026',
-        desc: 'From multimodal models to edge AI, here is what is shaping the future of machine learning.'
-    }
-];
 
 const Blog = () => {
     return (
@@ -49,18 +27,26 @@ const Blog = () => {
                     >
                         <div className="blog-image">
                             <img src={blog.image} alt={blog.title} />
+                            <div className="blog-image-overlay"></div>
                         </div>
                         <div className="blog-content">
                             <div className="blog-meta">
                                 <span><Calendar size={14} /> {blog.date}</span>
-                                <span><User size={14} /> {blog.author}</span>
+                                <span><Clock size={14} /> {blog.readTime}</span>
+                            </div>
+                            <div className="blog-tags">
+                                {blog.tags.slice(0, 3).map((tag, i) => (
+                                    <span key={i} className="blog-tag">
+                                        {tag}
+                                    </span>
+                                ))}
                             </div>
                             <h3 className="blog-title">{blog.title}</h3>
                             <p className="blog-desc">{blog.desc}</p>
-                            <a href="#" className="read-more">
+                            <Link href={`/blog/${blog.slug}`} className="read-more">
                                 <span>Read More</span>
                                 <ArrowRight size={16} />
-                            </a>
+                            </Link>
                         </div>
                     </motion.div>
                 ))}
