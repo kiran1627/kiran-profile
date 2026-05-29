@@ -1,130 +1,190 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { use3DTilt } from '../hooks/use3DTilt';
-import { Facebook, Twitter, Instagram, Linkedin, Play, MessageCircle, Star, ArrowRight } from 'lucide-react';
-import BackgroundIcons from './BackgroundIcons';
+import { ArrowDown, Sparkles } from 'lucide-react';
+import { Canvas } from '@react-three/fiber';
+import { AdaptiveDpr } from '@react-three/drei';
+import AvatarModel from './avatar/AvatarModel';
+import AvatarPedestal from './avatar/AvatarPedestal';
+import SceneLighting from './three/SceneLighting';
+import usePortfolioStore from '../store/usePortfolioStore';
+import { useVoiceSystem } from '../hooks/useVoiceSystem';
 import './Hero.css';
 
+const letterVariants = {
+  hidden: { opacity: 0, y: 80, rotateX: -90 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      delay: 0.5 + i * 0.04,
+      duration: 0.6,
+      ease: [0.215, 0.61, 0.355, 1],
+    },
+  }),
+};
+
+const subtitleVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { delay: 1.8, duration: 0.8, ease: 'easeOut' },
+  },
+};
+
+const FULL_NAME = 'KIRAN BABU BANDELA';
+
 const Hero = () => {
-    const { rotateX, rotateY, handleMouseMove, handleMouseLeave } = use3DTilt(10);
+  const setAvatarExpression = usePortfolioStore((s) => s.setAvatarExpression);
+  const { playIntro, INTRO_TEXT } = useVoiceSystem();
 
-    return (
-        <section 
-            id="hero" 
-            className="hero-section"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ perspective: "1000px" }}
+  // Greeting animation and voice on load
+  useEffect(() => {
+    // Only play intro if not already played, but since this mounts once, we can just call it
+    const timer = setTimeout(() => {
+      playIntro();
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [playIntro]);
+
+  return (
+    <section id="hero" className="hero-section">
+      {/* ─── 3D Avatar Canvas ─────────────────────────────── */}
+      <div className="hero-avatar-container">
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 45 }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+          style={{ background: 'transparent' }}
         >
-            <BackgroundIcons count={25} />
-            {/* Background Image Container */}
-            <motion.div 
-                className="hero-bg-image"
-                style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+          <AdaptiveDpr pixelated />
+          <SceneLighting />
+          <Suspense fallback={null}>
+            <AvatarModel />
+            <AvatarPedestal />
+          </Suspense>
+        </Canvas>
+      </div>
+
+      {/* ─── Text Content Layer ───────────────────────────── */}
+      <div className="hero-content-layer">
+        {/* Top badge */}
+        <motion.div
+          className="hero-badge"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
+          <Sparkles size={14} />
+          <span>AI-Powered Portfolio</span>
+        </motion.div>
+
+        {/* Main name - letter by letter */}
+        <h1 className="hero-name">
+          {FULL_NAME.split('').map((char, i) => (
+            <motion.span
+              key={i}
+              custom={i}
+              variants={letterVariants}
+              initial="hidden"
+              animate="visible"
+              className={char === ' ' ? 'hero-space' : 'hero-letter'}
             >
-                <img src="/kiran.jpg" alt="Background" className="bg-img" />
-            </motion.div>
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+        </h1>
 
-            <div className="hero-container">
-                {/* Left Content */}
-                <div className="hero-content">
-                    <motion.span 
-                        className="hero-subtitle"
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        WE CREATE AI SOLUTIONS FOR YOU
-                    </motion.span>
-                    
-                    <motion.h1 
-                        className="hero-title"
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                    >
-                        AI / ML <br /> ENGINEER
-                    </motion.h1>
+        {/* Subtitle */}
+        <motion.div
+          className="hero-subtitle-line"
+          variants={subtitleVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <span className="hero-subtitle-text">
+            AI Engineer
+            <span className="hero-divider">|</span>
+            Full Stack Developer
+            <span className="hero-divider">|</span>
+            Machine Learning Engineer
+          </span>
+        </motion.div>
 
-                    <motion.p 
-                        className="hero-desc"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                    >
-                        It is a long established fact that a reader will be distracted by 
-                        the readable content of a page when looking at its layout
-                    </motion.p>
-                    
-                    <motion.div 
-                        className="hero-btns"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                    >
-                        <a href="#contact" className="btn-contact">
-                            <div className="icon-circle">
-                                <ArrowRight size={20} />
-                            </div>
-                            <span>Contact Us</span>
-                        </a>
-                    </motion.div>
-                </div>
+        {/* Tagline */}
+        <motion.p
+          className="hero-tagline"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.2, duration: 0.8 }}
+        >
+          Building intelligent systems with LLMs, Computer Vision, and Autonomous Agents
+        </motion.p>
 
-            </div>
+        {/* CTA Buttons */}
+        <motion.div
+          className="hero-ctas"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.5, duration: 0.6 }}
+        >
+          <a href="#projects" className="btn-primary hero-btn">
+            View My Work
+          </a>
+          <button onClick={() => playIntro()} className="btn-outline hero-btn" style={{ cursor: 'pointer' }}>
+            Say Hello
+          </button>
+        </motion.div>
 
-            {/* Vertical Social Sidebar */}
-            <div className="social-sidebar">
-                <a href="#" className="social-link"><Twitter size={18} /></a>
-                <a href="#" className="social-link active"><div className="dot"></div></a>
-                <a href="#" className="social-link"><span className="be-icon">Be</span></a>
-                <a href="#" className="social-link"><Instagram size={18} /></a>
-            </div>
+        {/* Stats row */}
+        <motion.div
+          className="hero-stats"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.8, duration: 0.6 }}
+        >
+          <div className="hero-stat">
+            <span className="hero-stat-num">20+</span>
+            <span className="hero-stat-label">Open Source</span>
+          </div>
+          <div className="hero-stat-divider" />
+          <div className="hero-stat">
+            <span className="hero-stat-num">15+</span>
+            <span className="hero-stat-label">Projects</span>
+          </div>
+          <div className="hero-stat-divider" />
+          <div className="hero-stat">
+            <span className="hero-stat-num">500+</span>
+            <span className="hero-stat-label">Problems Solved</span>
+          </div>
+          <div className="hero-stat-divider" />
+          <div className="hero-stat">
+            <span className="hero-stat-num">10+</span>
+            <span className="hero-stat-label">Certifications</span>
+          </div>
+        </motion.div>
+      </div>
 
-            {/* Bottom Stats Bar */}
-            <div className="stats-bar">
-                <div className="stats-inner">
-                    <div className="stat-box">
-                        <div className="stat-icon"><MessageCircle size={24} /></div>
-                        <div className="stat-info">
-                            <h3>20+</h3>
-                            <p>Open Source</p>
-                        </div>
-                    </div>
-                    <div className="stat-box">
-                        <div className="stat-icon"><Star size={24} /></div>
-                        <div className="stat-info">
-                            <h3>15+</h3>
-                            <p>Projects Done</p>
-                        </div>
-                    </div>
-                    <div className="stat-box">
-                        <div className="stat-icon"><MessageCircle size={24} /></div>
-                        <div className="stat-info">
-                            <h3>500+</h3>
-                            <p>Solved Problems</p>
-                        </div>
-                    </div>
-                    <div className="stat-box">
-                        <div className="stat-icon"><Star size={24} /></div>
-                        <div className="stat-info">
-                            <h3>10+</h3>
-                            <p>Certifications</p>
-                        </div>
-                    </div>
-                    <div className="stat-box">
-                        <div className="stat-icon"><ArrowRight size={24} /></div>
-                        <div className="stat-info">
-                            <h3>24/7</h3>
-                            <p>Quick Learner</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+      {/* Scroll indicator */}
+      <motion.div
+        className="hero-scroll-indicator"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 3.5, duration: 0.5 }}
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ArrowDown size={20} />
+        </motion.div>
+        <span>Scroll to explore</span>
+      </motion.div>
+    </section>
+  );
 };
 
 export default Hero;

@@ -1,5 +1,5 @@
+/* App.css — kept minimal, global styles in globals.css */
 .app-container {
   position: relative;
-  min-height: 100vh;
-  background-color: var(--bg);
+  z-index: 1;
 }

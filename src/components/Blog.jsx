@@ -2,57 +2,98 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, ArrowRight, Clock, Tag } from 'lucide-react';
-import Link from 'next/link';
+import { Clock, ArrowRight, BookOpen, Terminal, ShieldAlert, Award } from 'lucide-react';
 import { blogs } from '../data/blogData';
 import './Blog.css';
 
 const Blog = () => {
-    return (
-        <section id="blog" className="blog-section">
-            <div className="section-header">
-                <span className="subtitle">Latest News</span>
-                <h2 className="title">My AI/ML Blog</h2>
-            </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
 
-            <div className="blog-grid">
-                {blogs.map((blog, index) => (
-                    <motion.div 
-                        key={index}
-                        className="blog-card glass"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        viewport={{ once: true }}
-                    >
-                        <div className="blog-image">
-                            <img src={blog.image} alt={blog.title} />
-                            <div className="blog-image-overlay"></div>
-                        </div>
-                        <div className="blog-content">
-                            <div className="blog-meta">
-                                <span><Calendar size={14} /> {blog.date}</span>
-                                <span><Clock size={14} /> {blog.readTime}</span>
-                            </div>
-                            <div className="blog-tags">
-                                {blog.tags.slice(0, 3).map((tag, i) => (
-                                    <span key={i} className="blog-tag">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                            <h3 className="blog-title">{blog.title}</h3>
-                            <p className="blog-desc">{blog.desc}</p>
-                            <Link href={`/blog/${blog.slug}`} className="read-more">
-                                <span>Read More</span>
-                                <ArrowRight size={16} />
-                            </Link>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        </section>
-    );
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: 'spring', stiffness: 80, damping: 14 }
+    }
+  };
+
+  return (
+    <section id="blog" className="blog-section">
+      <div className="blog-grid-overlay" />
+      <div className="blog-glow-orb" />
+
+      <div className="section-container">
+        {/* Section Header */}
+        <div className="section-header-cinematic">
+          <span className="section-eyebrow">
+            <BookOpen size={12} className="pulse-icon" /> TECHNICAL LEARNINGS
+          </span>
+          <h2 className="heading-primary-cinematic">
+            <span className="text-gradient">BLOGS</span>
+          </h2>
+          <p className="section-subtitle-cinematic">
+            Sharing insights on AI Engineering, Full Stack Development, and System Design.
+          </p>
+        </div>
+
+        {/* Premium Article Cards */}
+        <motion.div
+          className="blog-cards-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          {blogs.map((blog, i) => (
+            <motion.a
+              key={blog.slug}
+              href={`/blog/${blog.slug}`}
+              className="blog-card glass-panel-premium"
+              variants={cardVariants}
+            >
+              <div className="blog-card-image-wrapper">
+                <img src={blog.image} alt={blog.title} className="blog-card-image" />
+                <div className="blog-card-overlay">
+                  <div className="read-more-btn">
+                    <span>Read More</span>
+                    <ArrowRight size={14} className="arrow-icon" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="blog-card-content">
+                <div className="blog-card-meta">
+                  <span className="blog-card-date">{blog.date}</span>
+                  <span className="blog-card-read-time">
+                    <Clock size={12} /> {blog.readTime}
+                  </span>
+                </div>
+                
+                <h3 className="blog-card-title">{blog.title}</h3>
+                <p className="blog-card-desc">{blog.desc}</p>
+                
+                <div className="blog-card-tags">
+                  {blog.tags.map((tag, idx) => (
+                    <span key={idx} className="blog-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Blog;
