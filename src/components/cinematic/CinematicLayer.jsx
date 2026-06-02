@@ -72,14 +72,14 @@ export default function CinematicLayer() {
     const offsets = new Float32Array(PARTICLE_COUNT); // phase offsets
     const speeds = new Float32Array(PARTICLE_COUNT);  // animation speed
 
-    // Warm color palette
+    // Cool cinematic color palette
     const palette = [
-      new THREE.Color('#FF8C42'),  // warm orange
-      new THREE.Color('#FFB347'),  // light orange
+      new THREE.Color('#00E5FF'),  // cyan
+      new THREE.Color('#3B82F6'),  // blue
       new THREE.Color('#FFFFFF'),  // pure white
-      new THREE.Color('#FFD4A0'),  // peach
-      new THREE.Color('#FFA652'),  // amber
-      new THREE.Color('#E8D5B7'),  // warm cream
+      new THREE.Color('#8B5CF6'),  // violet
+      new THREE.Color('#A5F3FC'),  // light cyan
+      new THREE.Color('#E0E7FF'),  // light blue
     ];
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {

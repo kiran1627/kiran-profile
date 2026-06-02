@@ -32,7 +32,7 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.03) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.03) 0%, transparent 70%);
   filter: blur(80px);
   pointer-events: none;
   z-index: 1;
@@ -193,14 +193,14 @@
 }
 
 .premium-input:focus {
-  border-color: #00F0FF;
-  background: rgba(0, 240, 255, 0.02);
-  box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.1);
+  border-color: #00E5FF;
+  background: rgba(0, 229, 255, 0.02);
+  box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.1);
 }
 
 .premium-input:focus + .input-icon,
 .input-wrapper:focus-within .input-icon {
-  color: #00F0FF;
+  color: #00E5FF;
 }
 
 .premium-submit-btn {
@@ -210,8 +210,8 @@
   gap: 10px;
   padding: 16px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(139, 92, 246, 0.1));
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(139, 92, 246, 0.1));
+  border: 1px solid rgba(0, 229, 255, 0.3);
   color: #fff;
   font-family: var(--font-heading);
   font-weight: 700;
@@ -222,9 +222,9 @@
 }
 
 .premium-submit-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(139, 92, 246, 0.2));
-  border-color: rgba(0, 240, 255, 0.5);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(139, 92, 246, 0.2));
+  border-color: rgba(0, 229, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
   transform: translateY(-2px);
 }
 

@@ -16,7 +16,7 @@ function SceneContent() {
       <ParticleField />
       <HolographicGrid />
       <FloatingCodePanels />
-      <fog attach="fog" args={['#030014', 8, 30]} />
+      <fog attach="fog" args={['#000000', 8, 30]} />
     </>
   );
 }

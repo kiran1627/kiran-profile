@@ -32,14 +32,14 @@ export default function SceneLighting() {
   return (
     <>
       {/* Ambient - very low for dark mood */}
-      <ambientLight intensity={0.15} color="#1a1a3e" />
+      <ambientLight intensity={0.05} color="#050505" />
 
       {/* Primary key light - cyan tint */}
       <pointLight
         ref={light1Ref}
         position={[3, 4, 5]}
-        intensity={1.5}
-        color="#00F0FF"
+        intensity={1.2}
+        color="#00E5FF"
         distance={20}
         decay={2}
       />
@@ -48,18 +48,18 @@ export default function SceneLighting() {
       <pointLight
         ref={light2Ref}
         position={[-4, 2, 3]}
-        intensity={1}
+        intensity={0.8}
         color="#8B5CF6"
         distance={15}
         decay={2}
       />
 
-      {/* Rim light from behind - strong cyan */}
+      {/* Rim light from behind - strong blue */}
       <pointLight
         ref={light3Ref}
         position={[0, 3, -5]}
-        intensity={0.5}
-        color="#00F0FF"
+        intensity={0.4}
+        color="#3B82F6"
         distance={12}
         decay={2}
       />
@@ -79,8 +79,8 @@ export default function SceneLighting() {
       {/* Subtle directional for overall shape */}
       <directionalLight
         position={[5, 5, 5]}
-        intensity={0.3}
-        color="#E0E7FF"
+        intensity={0.15}
+        color="#FFFFFF"
       />
     </>
   );

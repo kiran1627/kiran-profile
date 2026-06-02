@@ -11,7 +11,7 @@ const orbitsData = [
     name: 'Programming Layer',
     radius: 110,
     speed: 40,
-    color: '#00F0FF',
+    color: '#00E5FF',
     nodes: [
       { id: 'python', name: 'Python', level: 'Expert', desc: 'Primary language for developing complex AI models, machine learning pipelines, and autonomous agent orchestration.', projects: ['AI Interview Assistant', 'Multi-Agent FinPilot', 'Threat Monitor'], related: ['Generative AI', 'FastAPI', 'Deep Learning'], color: '#3776AB', code: 'PY' },
       { id: 'sql', name: 'SQL', level: 'Advanced', desc: 'Relational database querying and optimization for massive dataset handling.', projects: ['Smart Donor Matching DB', 'FinPilot Transaction Ledger'], related: ['Python', 'Node.js'], color: '#336791', code: 'SQL' },
@@ -45,7 +45,7 @@ const orbitsData = [
     name: 'AI Layer',
     radius: 320,
     speed: -85,
-    color: '#FF8C42',
+    color: '#00E5FF',
     nodes: [
       { id: 'ml', name: 'Machine Learning', level: 'Expert', desc: 'Designing statistical classifiers, regression graphs, and optimization structures.', projects: ['Smart Donor Compatibility Index', 'Feature Weight Classifiers'], related: ['Deep Learning', 'Python'], color: '#3B82F6', code: 'ML' },
       { id: 'dl', name: 'Deep Learning', level: 'Advanced', desc: 'Neural network training, weights optimization, and layer configurations (CNNs, transformers).', projects: ['Firearm YOLOv8 detector', 'Vision-Language embedding parser'], related: ['Machine Learning', 'Generative AI'], color: '#EE4C2C', code: 'DL' },
@@ -58,7 +58,7 @@ const orbitsData = [
     name: 'Cloud Layer',
     radius: 390,
     speed: 100,
-    color: '#33FFBD',
+    color: '#8B5CF6',
     nodes: [
       { id: 'aws', name: 'AWS', level: 'Advanced', desc: 'Amazon Web Services deployment, serverless lambda triggers, EC2 scaling, S3 logs storage.', projects: ['Smart Donor secure backend', 'ML model endpoint hosting'], related: ['Docker', 'Git'], color: '#FF9900', code: 'AWS' },
       { id: 'docker', name: 'Docker', level: 'Advanced', desc: 'Containerizing backend scripts and microservices to ensure complete environment stability.', projects: ['FastAPI Threat monitoring container', 'DevOps deployment modules'], related: ['AWS', 'GitHub'], color: '#2496ED', code: 'DK' },
@@ -199,7 +199,7 @@ export default function TechOrbit() {
             <svg className="universe-circuits" viewBox="-450 -450 900 900">
               <defs>
                 <radialGradient id="aiCoreGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#00F0FF" stopOpacity="0.25" />
+                  <stop offset="0%" stopColor="#00E5FF" stopOpacity="0.25" />
                   <stop offset="100%" stopColor="#030014" stopOpacity="0" />
                 </radialGradient>
               </defs>

@@ -341,8 +341,8 @@
 }
 
 .highlight-card {
-  background: rgba(0, 240, 255, 0.04);
-  border-color: rgba(0, 240, 255, 0.18);
+  background: rgba(0, 229, 255, 0.04);
+  border-color: rgba(0, 229, 255, 0.18);
 }
 
 .project-workflow-card {
@@ -369,7 +369,7 @@
   display: grid;
   place-items: center;
   background: rgba(255, 255, 255, 0.05);
-  color: #00F0FF;
+  color: #00E5FF;
   font-family: 'Space Grotesk', monospace;
   font-size: 0.85rem;
   font-weight: 800;
@@ -468,13 +468,13 @@
 }
 
 .project-action-btn-primary {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: rgba(0, 240, 255, 0.28);
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.28);
   color: #00f0ff;
 }
 
 .project-action-btn-primary:hover {
-  background: rgba(0, 240, 255, 0.2);
+  background: rgba(0, 229, 255, 0.2);
 }
 
 /* Responsive */
@@ -809,8 +809,8 @@
 
 .highlight-box-cyan {
   padding: 16px 20px;
-  background: rgba(0, 240, 255, 0.03);
-  border-left: 2px solid #00F0FF;
+  background: rgba(0, 229, 255, 0.03);
+  border-left: 2px solid #00E5FF;
   border-radius: 4px;
 }
 
@@ -1028,9 +1028,9 @@
 
 .live-btn {
   border: 1px solid;
-  border-color: rgba(0, 240, 255, 0.25);
-  background: rgba(0, 240, 255, 0.02);
-  color: #00F0FF;
+  border-color: rgba(0, 229, 255, 0.25);
+  background: rgba(0, 229, 255, 0.02);
+  color: #00E5FF;
   border-color: var(--case-color);
   background: rgba(0, 0, 0, 0.2);
   color: var(--case-color);

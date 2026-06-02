@@ -11,7 +11,7 @@ const gridMaterial = new THREE.ShaderMaterial({
   side: THREE.DoubleSide,
   uniforms: {
     uTime: { value: 0 },
-    uColor: { value: new THREE.Color('#00F0FF') },
+    uColor: { value: new THREE.Color('#00E5FF') },
   },
   vertexShader: `
     varying vec2 vUv;

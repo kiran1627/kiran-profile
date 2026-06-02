@@ -6,11 +6,11 @@ import { Mail, Linkedin, Github, FileText, Phone, Send, User, MessageSquare } fr
 import './Contact.css';
 
 const CONTACT_LINKS = [
-  { name: 'Email', value: 'kiranbabubandela6@gmail.com', icon: Mail, url: 'mailto:kiranbabubandela6@gmail.com', color: '#00F0FF' },
+  { name: 'Email', value: 'kiranbabubandela6@gmail.com', icon: Mail, url: 'mailto:kiranbabubandela6@gmail.com', color: '#00E5FF' },
   { name: 'LinkedIn', value: 'linkedin.com/in/kiranbabu18', icon: Linkedin, url: 'https://linkedin.com/in/kiranbabu18', color: '#8B5CF6' },
-  { name: 'GitHub', value: 'github.com/kiran1627', icon: Github, url: 'https://github.com/kiran1627', color: '#FF006E' },
-  { name: 'WhatsApp', value: '+91 93813 42247', icon: Phone, url: 'https://wa.me/919381342247', color: '#33FFBD' },
-  { name: 'Resume', value: 'Download PDF', icon: FileText, url: '/Kiran_Resume.pdf', color: '#3B82F6' }
+  { name: 'GitHub', value: 'github.com/kiran1627', icon: Github, url: 'https://github.com/kiran1627', color: '#3B82F6' },
+  { name: 'WhatsApp', value: '+91 93813 42247', icon: Phone, url: 'https://wa.me/919381342247', color: '#FFFFFF' },
+  { name: 'Resume', value: 'Download PDF', icon: FileText, url: '/Kiran_Resume.pdf', color: '#00E5FF' }
 ];
 
 const Contact = () => {

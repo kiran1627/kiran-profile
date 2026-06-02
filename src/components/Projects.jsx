@@ -23,7 +23,7 @@ const projectsData = [
       'Interactive run tracking & historical replays'
     ],
     challenges: 'Balancing non-deterministic LLM agent reasoning with deterministic financial compliance thresholds.',
-    color: '#00F0FF',
+    color: '#00E5FF',
     videoSrc: '/Finpilot.mp4',
     architecture: '/finpilot_architecture_1780035965751.png',
     github: 'https://github.com/kiran1627',
@@ -91,7 +91,7 @@ const projectsData = [
       'Dynamic SMS & WebSocket alert dispatch logs'
     ],
     challenges: 'Protecting patient identity records while maintaining transparent and rapid geolocation routing variables.',
-    color: '#FF006E',
+    color: '#3B82F6',
     videoSrc: '/BloodDonation-demo-compressed.mp4',
     architecture: '/blood_donation_architecture_1780035932279.png',
     github: 'https://github.com/kiran1627',
@@ -125,7 +125,7 @@ const projectsData = [
       'Voice synthesized outputs using gTTS engines'
     ],
     challenges: 'Orchestrating concurrent visual, vocal, and textual vector inputs without incurring excessive audio lag.',
-    color: '#33FFBD',
+    color: '#FFFFFF',
     videoSrc: '/chatbot-demo.mp4',
     architecture: '/chatbot_architecture_1780035950296.png',
     github: 'https://github.com/kiran1627',

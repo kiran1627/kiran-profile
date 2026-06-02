@@ -5,10 +5,10 @@
    ═══════════════════════════════════════════════════════════ */
 
 @theme {
-  --color-bg-primary: #050816;
-  --color-bg-secondary: #0B1120;
-  --color-surface: #111827;
-  --color-glass-surface: rgba(255, 255, 255, 0.05);
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #050505;
+  --color-surface: #0A0A0A;
+  --color-glass-surface: rgba(255, 255, 255, 0.04);
   --color-glass-border: rgba(255, 255, 255, 0.08);
   --color-primary: #00E5FF;
   --color-primary-dark: #00B8C4;
@@ -17,15 +17,15 @@
   --color-secondary-glow: rgba(59, 130, 246, 0.25);
   --color-highlight: #8B5CF6;
   --color-text-primary: #FFFFFF;
-  --color-text-secondary: #CBD5E1;
-  --color-text-muted: #94A3B8;
+  --color-text-secondary: #B8B8B8;
+  --color-text-muted: #7A7A7A;
   --color-success: #10B981;
   --color-warning: #F59E0B;
   --color-border-subtle: rgba(255, 255, 255, 0.08);
   --color-border-glow: rgba(0, 229, 255, 0.18);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
   --shadow-glow: 0 0 40px rgba(0, 229, 255, 0.25);
   --radius: 24px;
   --radius-lg: 32px;
@@ -44,23 +44,23 @@
    ROOT VARIABLES (legacy compat)
    ═══════════════════════════════════════════════════ */
 :root {
-  --bg-primary: #050816;
-  --bg-secondary: #0B1120;
-  --surface: #111827;
-  --glass-surface: rgba(255, 255, 255, 0.05);
+  --bg-primary: #000000;
+  --bg-secondary: #050505;
+  --surface: #0A0A0A;
+  --glass-surface: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.08);
   --primary: #00E5FF;
   --primary-glow: rgba(0, 229, 255, 0.35);
   --secondary: #3B82F6;
   --highlight: #8B5CF6;
   --text-primary: #FFFFFF;
-  --text-secondary: #CBD5E1;
-  --text-muted: #94A3B8;
+  --text-secondary: #B8B8B8;
+  --text-muted: #7A7A7A;
   --success: #10B981;
   --warning: #F59E0B;
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
   --shadow-glow: 0 0 40px rgba(0, 229, 255, 0.25);
   --radius: 24px;
   --radius-lg: 32px;
@@ -98,10 +98,6 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   min-height: 100vh;
-  background-image:
-    radial-gradient(circle at 20% 10%, rgba(0, 229, 255, 0.08), transparent 24%),
-    radial-gradient(circle at 85% 5%, rgba(139, 92, 246, 0.05), transparent 22%),
-    radial-gradient(circle at 50% 80%, rgba(0, 229, 255, 0.06), transparent 28%);
 }
 
 h1,

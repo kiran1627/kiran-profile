@@ -53,7 +53,7 @@ function CodePanel({ position, rotation, snippet, index }) {
         <planeGeometry args={[3.5, 2.5]} />
         <meshBasicMaterial
           ref={materialRef}
-          color="#00F0FF"
+          color="#00E5FF"
           transparent
           opacity={0.06}
           side={THREE.DoubleSide}
@@ -63,14 +63,14 @@ function CodePanel({ position, rotation, snippet, index }) {
 
       {/* Panel border */}
       <lineSegments geometry={PANEL_EDGES}>
-        <lineBasicMaterial color="#00F0FF" transparent opacity={0.15} />
+        <lineBasicMaterial color="#00E5FF" transparent opacity={0.15} />
       </lineSegments>
 
       {/* Code text */}
       <Text
         position={[0, 0, 0.01]}
         fontSize={0.12}
-        color="#00F0FF"
+        color="#00E5FF"
         anchorX="center"
         anchorY="middle"
         maxWidth={3}

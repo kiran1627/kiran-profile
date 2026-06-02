@@ -13,9 +13,9 @@ function createParticleData() {
   const colors = new Float32Array(PARTICLE_COUNT * 3);
   const sizes = new Float32Array(PARTICLE_COUNT);
 
-  const colorA = new THREE.Color('#00F0FF');
+  const colorA = new THREE.Color('#00E5FF');
   const colorB = new THREE.Color('#8B5CF6');
-  const colorC = new THREE.Color('#33FFBD');
+  const colorC = new THREE.Color('#3B82F6');
 
   for (let i = 0; i < PARTICLE_COUNT; i++) {
     const i3 = i * 3;
