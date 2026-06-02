@@ -5,68 +5,42 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Network, Award, Briefcase, Info, Compass, Terminal, Shield, Zap } from 'lucide-react';
 import './Ecosystem.css';
 
-// Concentric Orbits and technical nodes database
-const orbitsData = [
-  {
-    name: 'Programming Layer',
-    radius: 110,
-    speed: 40,
-    color: '#00E5FF',
-    nodes: [
-      { id: 'python', name: 'Python', level: 'Expert', desc: 'Primary language for developing complex AI models, machine learning pipelines, and autonomous agent orchestration.', projects: ['AI Interview Assistant', 'Multi-Agent FinPilot', 'Threat Monitor'], related: ['Generative AI', 'FastAPI', 'Deep Learning'], color: '#3776AB', code: 'PY' },
-      { id: 'sql', name: 'SQL', level: 'Advanced', desc: 'Relational database querying and optimization for massive dataset handling.', projects: ['Smart Donor Matching DB', 'FinPilot Transaction Ledger'], related: ['Python', 'Node.js'], color: '#336791', code: 'SQL' },
-      { id: 'javascript', name: 'JavaScript', level: 'Expert', desc: 'Core scripting language for frontend interactions, dynamic canvasses, and animations.', projects: ['Cinematic Portfolio Portal', 'Interactive Command Dashboard'], related: ['TypeScript', 'React'], color: '#F7DF1E', code: 'JS' },
-      { id: 'typescript', name: 'TypeScript', level: 'Advanced', desc: 'Strongly typed language layer for secure, scalable, and compile-checked production modules.', projects: ['Multi-agent Finance Core', 'Real-time WebSocket Hub'], related: ['React', 'Next.js'], color: '#3178C6', code: 'TS' }
-    ]
-  },
-  {
-    name: 'Frontend Layer',
-    radius: 180,
-    speed: -55, // Negative for counter-clockwise
-    color: '#8B5CF6',
-    nodes: [
-      { id: 'react', name: 'React', level: 'Expert', desc: 'Component-driven frontend development using reactive state-engines and virtual DOM manipulation.', projects: ['PROACT-SAFE Grid Dashboard', 'Holographic Portals'], related: ['Next.js', 'Tailwind CSS'], color: '#61DAFB', code: 'RE' },
-      { id: 'nextjs', name: 'Next.js', level: 'Expert', desc: 'React meta-framework for high-performance server-side rendering, edge API routes, and static generation.', projects: ['Cinematic Portfolio Core', 'Autonomous FinPilot WebApp'], related: ['React', 'TypeScript'], color: '#ffffff', code: 'NX' },
-      { id: 'tailwind', name: 'Tailwind CSS', level: 'Expert', desc: 'Utility-first styling utility for highly responsive, performant, and premium modern interfaces.', projects: ['Cinematic UI components', 'Command Dashboard layout'], related: ['React', 'Next.js'], color: '#38BDF8', code: 'TW' }
-    ]
-  },
-  {
-    name: 'Backend Layer',
-    radius: 250,
-    speed: 70,
-    color: '#3B82F6',
-    nodes: [
-      { id: 'nodejs', name: 'Node.js', level: 'Expert', desc: 'Asynchronous event-driven server runtime for scalable backend pipelines and fast routing.', projects: ['WebSocket Chat Hub', 'Dynamic API Server Gateway'], related: ['FastAPI', 'TypeScript'], color: '#339933', code: 'ND' },
-      { id: 'fastapi', name: 'FastAPI', level: 'Advanced', desc: 'Modern, high-performance python API framework for microservices and direct ML engine linkages.', projects: ['Multi-agent Finance API', 'Threat Detector Telemetry'], related: ['Python', 'Generative AI'], color: '#05998B', code: 'FA' },
-      { id: 'rest', name: 'REST APIs', level: 'Expert', desc: 'Secure, standards-compliant interface architectures for resource-state mapping and data synchronization.', projects: ['Unified Donor Dispatch API', 'Conversational AI endpoint'], related: ['FastAPI', 'Node.js'], color: '#A855F7', code: 'API' }
-    ]
-  },
-  {
-    name: 'AI Layer',
-    radius: 320,
-    speed: -85,
-    color: '#00E5FF',
-    nodes: [
-      { id: 'ml', name: 'Machine Learning', level: 'Expert', desc: 'Designing statistical classifiers, regression graphs, and optimization structures.', projects: ['Smart Donor Compatibility Index', 'Feature Weight Classifiers'], related: ['Deep Learning', 'Python'], color: '#3B82F6', code: 'ML' },
-      { id: 'dl', name: 'Deep Learning', level: 'Advanced', desc: 'Neural network training, weights optimization, and layer configurations (CNNs, transformers).', projects: ['Firearm YOLOv8 detector', 'Vision-Language embedding parser'], related: ['Machine Learning', 'Generative AI'], color: '#EE4C2C', code: 'DL' },
-      { id: 'genai', name: 'Generative AI', level: 'Expert', desc: 'Retrieval Augmented Generation (RAG), context optimization, prompt engineering, and fine-tuning.', projects: ['Multimodal Conversational Agent', 'Agentic Resume Analyzer'], related: ['LangChain', 'Python'], color: '#8E75FF', code: 'AI' },
-      { id: 'langchain', name: 'LangChain', level: 'Advanced', desc: 'Orchestrating modular transformer flows, RAG indexes, and prompt template parameters.', projects: ['Multimodal Chatbot', 'Context Synthesis System'], related: ['Generative AI', 'LangGraph'], color: '#00A67E', code: 'LC' },
-      { id: 'langgraph', name: 'LangGraph', level: 'Advanced', desc: 'Stateful, multi-agent cyclical networks for executing non-deterministic AI decisions.', projects: ['Autonomous FinPilot Orchestration', 'Multi-Agent Reasoning Core'], related: ['LangChain', 'Python'], color: '#FF6F00', code: 'LG' }
-    ]
-  },
-  {
-    name: 'Cloud Layer',
-    radius: 390,
-    speed: 100,
-    color: '#8B5CF6',
-    nodes: [
-      { id: 'aws', name: 'AWS', level: 'Advanced', desc: 'Amazon Web Services deployment, serverless lambda triggers, EC2 scaling, S3 logs storage.', projects: ['Smart Donor secure backend', 'ML model endpoint hosting'], related: ['Docker', 'Git'], color: '#FF9900', code: 'AWS' },
-      { id: 'docker', name: 'Docker', level: 'Advanced', desc: 'Containerizing backend scripts and microservices to ensure complete environment stability.', projects: ['FastAPI Threat monitoring container', 'DevOps deployment modules'], related: ['AWS', 'GitHub'], color: '#2496ED', code: 'DK' },
-      { id: 'git', name: 'Git', level: 'Expert', desc: 'Decentralized version control system for staging commits, merge conflicts management, and pipelines.', projects: ['Production repository branches'], related: ['GitHub', 'AWS'], color: '#F05032', code: 'GIT' },
-      { id: 'github', name: 'GitHub', level: 'Expert', desc: 'Hosting repository trunks, managing CI/CD Actions workflows, and collaborative developer cycles.', projects: ['Ecosystem release pipelines'], related: ['Git', 'AWS'], color: '#ffffff', code: 'GH' }
-    ]
-  }
+import { categories as sourceCategories, skills as sourceSkills } from '../../data/skillsEcosystemData';
+
+// Map categories to 4 distinct layers to avoid overcrowding
+const layerMapping = {
+  'prog': 0, 'front': 0, 'back': 0, 'db': 0,          // Layer 0: Core Stack
+  'ai': 1, 'aif': 1, 'ds': 1,                         // Layer 1: AI & Data
+  'cloud': 2, 'sec': 2,                               // Layer 2: Cloud & Security
+  'se': 3, 'tools': 3, 'learn': 3                     // Layer 3: Engineering & Tools
+};
+
+const layerConfigs = [
+  { name: 'Core Stack Layer', radius: 140, speed: 20, color: '#00E5FF' },
+  { name: 'AI & Data Layer', radius: 240, speed: -15, color: '#FF3366' },
+  { name: 'Cloud & Security Layer', radius: 340, speed: 25, color: '#2496ED' },
+  { name: 'Engineering & Tools Layer', radius: 440, speed: -18, color: '#A855F7' }
 ];
+
+// Build the orbitsData dynamically
+const orbitsData = layerConfigs.map((config, idx) => ({
+  ...config,
+  nodes: sourceSkills
+    .filter(skill => layerMapping[skill.category] === idx)
+    .map(skill => {
+      const cat = sourceCategories.find(c => c.id === skill.category);
+      return {
+        id: skill.id,
+        name: skill.name,
+        level: 'Advanced',
+        desc: `Core technology within the ${cat?.name || 'ecosystem'} domain.`,
+        projects: ['Ecosystem Integration', 'Platform Development'],
+        related: [],
+        color: cat?.color || config.color,
+        code: skill.name.replace(/[^A-Z]/g, '').substring(0, 2) || skill.name.substring(0, 2).toUpperCase()
+      };
+    })
+}));
 
 // Flatten all nodes to simplify reference querying
 const allNodes = orbitsData.reduce((acc, orbit) => [...acc, ...orbit.nodes], []);
