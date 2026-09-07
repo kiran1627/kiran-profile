@@ -477,6 +477,16 @@
   background: rgba(0, 229, 255, 0.2);
 }
 
+.project-action-btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.project-action-btn-disabled:hover {
+  transform: none;
+  background: rgba(255, 255, 255, 0.04);
+}
+
 /* Responsive */
 @media (max-width: 1100px) {
   .project-layout-grid {

@@ -307,7 +307,7 @@ export default function VideoHero() {
             <div ref={contentPanelRef} className={styles.glassPanel}>
               
               <div ref={taglineRef} className={styles.tagline}>
-                AI ENGINEER &amp; FULL STACK DEVELOPER
+                GENAI/RAG ENGINEER BUILDING PRODUCTION AI SYSTEMS
               </div>
 
               <h1 className={styles.nameHeader}>
@@ -320,18 +320,18 @@ export default function VideoHero() {
               </h1>
 
               <p ref={descRef} className={styles.description}>
-                Building intelligent systems, scalable applications, and AI-powered digital experiences.
+                RAG pipelines &middot; Multi-agent orchestration &middot; LLM microservices
               </p>
 
               <div ref={ctaRef} className={styles.actionsBox}>
                 <button onClick={() => scrollToId('projects')} className={styles.btnPrimary}>
-                  Explore Work
+                  View Projects
                 </button>
                 <a href="/Kiran_Resume.pdf" className={styles.btnSecondary} target="_blank" rel="noreferrer">
                   Download Resume
                 </a>
                 <button onClick={() => scrollToId('contact')} className={styles.btnGlass}>
-                  Contact Me
+                  Contact
                 </button>
               </div>
 

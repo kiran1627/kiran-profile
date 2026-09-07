@@ -7,34 +7,34 @@ import './About.css';
 
 const TECH_RIBBON = [
   'Python',
-  'SQL',
-  'Machine Learning',
-  'Generative AI',
-  'React',
-  'Next.js',
-  'FastAPI',
+  'RAG',
   'LangChain',
+  'LangGraph',
+  'Qdrant',
+  'FastAPI',
+  'Next.js',
   'Docker',
+  'WebSockets',
   'AWS'
 ];
 
 const PROFESSIONAL_BADGES = [
-  { label: 'PRIMARY STACK', value: 'Python • React' },
-  { label: 'FOCUS AREA', value: 'GenAI Systems' },
+  { label: 'PRIMARY STACK', value: 'Python • FastAPI' },
+  { label: 'FOCUS AREA', value: 'RAG & Multi-Agent Systems' },
 ];
 
 const METRICS = [
-  { number: '30+', label: 'Projects Built', delay: 0 },
-  { number: '15+', label: 'Technologies Used', delay: 0.1 },
-  { number: '5+', label: 'Areas of Expertise', delay: 0.2 },
+  { number: '5', label: 'Govt. Departments Served', delay: 0 },
+  { number: '2', label: 'Retrieval Stages (BM25+Vector)', delay: 0.1 },
+  { number: '8B', label: 'Param Model Self-Hosted', delay: 0.2 },
 ];
 
 const About = () => {
-  const completeStory = `I blend modern AI systems with production-minded full-stack engineering to build premium digital platforms that feel intelligent, reliable, and beautifully designed. From automation scripts and ML pipelines to generative AI orchestration, I've developed deep expertise in transforming complex problems into elegant systems.
+  const completeStory = `I own the AI microservice behind SurakshaGrid, a public-safety platform running live across 5 Telangana government departments. It runs a hybrid retrieval pipeline — BM25 keyword search fused with Qdrant vector search via reciprocal rank fusion, then reranked with a BGE cross-encoder — serving a self-hosted Qwen3-8B model for grounded, low-hallucination responses.
 
-My work combines architecture-first planning, advanced AI tooling, and meticulous interface design. I'm passionate about creating experiences that are calm, powerful, and built for sophisticated users—where every interaction feels intentional and every system hums with precision.
+Alongside the retrieval layer, I built SETU GRID, a real-time WebSocket coordination layer that keeps department dashboards in sync as incidents update, without polling.
 
-Currently, I focus on generative AI systems, secure backend orchestration, and data-rich interfaces engineered for scale and clarity. My goal is to shape AI-native products that transcend typical applications—premium platforms that anticipate user needs and deliver measurable impact.`;
+Currently targeting an entry-level AI/ML or GenAI/RAG Engineer role, with a long-term trajectory toward AI Architect — designing the retrieval, orchestration, and serving layers that production LLM systems run on, not just prototyping against an API.`;
 
   return (
     <section id="about" className="about-premium-section">
@@ -52,7 +52,7 @@ Currently, I focus on generative AI systems, secure backend orchestration, and d
             <span className="text-gradient">ABOUT</span>
           </h2>
           <p className="section-subtitle-cinematic">
-            AI Engineer & Full Stack Developer
+            GenAI/RAG Engineer
           </p>
         </div>
 

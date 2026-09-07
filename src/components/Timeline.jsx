@@ -2,25 +2,25 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Briefcase, GraduationCap, Award } from 'lucide-react';
+import { Briefcase, Award } from 'lucide-react';
 import './Timeline.css';
 
 const TIMELINE_DATA = [
   {
     id: 1,
-    year: '2022',
-    title: 'B.Tech AI & ML',
-    subtitle: 'Started Journey',
-    description: 'Enrolled in B.Tech focusing on Artificial Intelligence and Machine Learning. Built foundational knowledge in Python, data structures, and algorithms.',
-    icon: <GraduationCap size={20} />,
-    type: 'edu'
+    year: 'Jan 2025 – Mar 2025',
+    title: 'AI Intern',
+    subtitle: 'Placemantra',
+    description: 'Tuned PyTorch and TensorFlow models for a placement-matching pipeline, improving prediction accuracy by ~12%. Tracked experiments and model versions with MLflow.',
+    icon: <Briefcase size={20} />,
+    type: 'work'
   },
   {
     id: 2,
-    year: '2023',
-    title: 'First AI Models',
-    subtitle: 'Computer Vision & NLP',
-    description: 'Developed initial projects in computer vision using OpenCV and YOLO. Began exploring Natural Language Processing and Transformer models.',
+    year: 'Jun 2026 – Present',
+    title: 'IT Intern',
+    subtitle: 'IKCON Digital IT Services',
+    description: 'Own the AI microservice behind SurakshaGrid, a public-safety platform live across 5 Telangana government departments. Built the hybrid RAG pipeline (BM25 + Qdrant, RRF fusion, BGE reranking) serving a self-hosted Qwen3-8B, wired in Gemini/OpenRouter as fallback model routes, built SETU GRID (real-time WebSocket coordination layer), and instrumented the service with Prometheus metrics and structured logging.',
     icon: <Briefcase size={20} />,
     type: 'work'
   },
@@ -28,17 +28,17 @@ const TIMELINE_DATA = [
     id: 3,
     year: '2024',
     title: 'Innovation Marathon',
-    subtitle: 'Finalist by TASK/SAP',
-    description: 'Selected as a finalist in the Innovation Marathon for proposing an AI-enabled Smart Blood Donation System, beating thousands of participants.',
+    subtitle: 'Finalist — TASK/SAP',
+    description: 'Selected as a finalist for proposing an AI-enabled Smart Blood Donation System.',
     icon: <Award size={20} />,
     type: 'award'
   },
   {
     id: 4,
     year: '2025',
-    title: 'Autonomous Systems',
-    subtitle: 'Multi-Agent AI',
-    description: 'Architected and built FinPilot, an autonomous multi-agent finance system. Focused on LLM orchestration, RAG pipelines, and full-stack integration.',
+    title: 'FinPilot',
+    subtitle: 'Multi-Agent Finance Platform',
+    description: 'Architected and built FinPilot, a multi-agent finance platform on LangGraph, with a FastAPI backend and Next.js client.',
     icon: <Briefcase size={20} />,
     type: 'work'
   }
@@ -58,7 +58,7 @@ const Timeline = () => {
   });
 
   return (
-    <section id="timeline" className="timeline-section" ref={containerRef} style={{ position: 'relative' }}>
+    <section id="experience" className="timeline-section" ref={containerRef} style={{ position: 'relative' }}>
       <div className="section-container">
 
         
@@ -70,7 +70,7 @@ const Timeline = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            My Timeline
+            Experience
           </motion.h2>
         </div>
 

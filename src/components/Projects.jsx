@@ -251,9 +251,15 @@ const Projects = () => {
                       <a href={project.github} target="_blank" rel="noreferrer" className="project-action-btn">
                         <Github size={14} /> View Repository
                       </a>
-                      <a href={project.live} target="_blank" rel="noreferrer" className="project-action-btn project-action-btn-primary">
-                        <ExternalLink size={14} /> Live Demo
-                      </a>
+                      {project.live && project.live !== '#' ? (
+                        <a href={project.live} target="_blank" rel="noreferrer" className="project-action-btn project-action-btn-primary">
+                          <ExternalLink size={14} /> Live Demo
+                        </a>
+                      ) : (
+                        <span className="project-action-btn project-action-btn-disabled" aria-disabled="true">
+                          <ExternalLink size={14} /> Live Demo Coming Soon
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

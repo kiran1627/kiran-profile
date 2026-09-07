@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { knowledgeBase, retrieveContext } from '../../../src/data/knowledgeBase';
 
-const SYSTEM_PROMPT = `You are Kiran Babu Bandela's AI assistant on his portfolio website. You represent Kiran and answer questions from recruiters, hiring managers, and visitors.
+const SYSTEM_PROMPT = `You are Kiran Babu Bandela's AI assistant on his portfolio website. Kiran is a GenAI/RAG Engineer transitioning toward AI Architect roles. You represent Kiran and answer questions from recruiters, hiring managers, and visitors.
 
 RULES:
 - Answer in first person as if you ARE Kiran (e.g., "I specialize in..." not "Kiran specializes in...")
@@ -106,7 +106,7 @@ function generateFallbackResponse(query, docs) {
   const queryLower = query.toLowerCase();
 
   if (queryLower.includes('skill') || queryLower.includes('tech') || queryLower.includes('stack')) {
-    return "I specialize in Python, PyTorch, TensorFlow, and the Hugging Face ecosystem. I'm particularly passionate about LLM fine-tuning (LoRA, QLoRA), RAG pipelines with LangChain, and building AI agents. On the web side, I work with React, Next.js, FastAPI, and Node.js. For cloud, I have experience with AWS, Azure, and GCP!";
+    return "I work on hybrid RAG pipelines (BM25 + Qdrant, RRF fusion, BGE reranking), LangChain/LangGraph orchestration, and serving self-hosted LLMs like Qwen3-8B. On the infra side: FastAPI, Docker, MLflow, WebSockets, and AWS. Core ML: PyTorch, TensorFlow, and Hugging Face.";
   }
 
   if (queryLower.includes('project') || queryLower.includes('work') || queryLower.includes('built')) {
@@ -118,7 +118,7 @@ function generateFallbackResponse(query, docs) {
   }
 
   if (queryLower.includes('experience') || queryLower.includes('education') || queryLower.includes('background')) {
-    return "I'm pursuing my B.Tech in Computer Science specializing in AI & ML (2022-2026). I've been actively building AI projects, contributing to open source, and honing my skills in Generative AI and LLMs. I was also selected as a finalist in the Innovation Marathon by TASK/SAP!";
+    return "I'm finishing my B.Tech in AI & ML at JNTUH (May 2026). As an IT Intern at IKCON Digital IT Services, I own the AI microservice behind SurakshaGrid, a public-safety platform live across 5 Telangana government departments — hybrid RAG pipeline serving a self-hosted Qwen3-8B. Before that, I was an AI Intern at Placemantra tuning PyTorch/TensorFlow models. I'm also Oracle certified in Generative AI and Data Science.";
   }
 
   // Default: use the most relevant doc

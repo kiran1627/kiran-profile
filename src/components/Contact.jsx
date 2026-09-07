@@ -16,16 +16,32 @@ const CONTACT_LINKS = [
 const Contact = () => {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState(null); // { type: 'success' | 'error', text: string }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setStatus(null);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+
       setFormState({ name: '', email: '', message: '' });
-      alert('Message sent successfully!');
-    }, 1500);
+      setStatus({ type: 'success', text: "Message sent! I'll get back to you soon." });
+    } catch (err) {
+      setStatus({ type: 'error', text: err.message || 'Failed to send message. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -99,46 +115,54 @@ const Contact = () => {
               <p>Fill out the form below and I'll get back to you as soon as possible.</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="premium-contact-form">
+            <form onSubmit={handleSubmit} className="premium-contact-form" noValidate>
               <div className="form-group">
+                <label htmlFor="contact-name" className="sr-only">Your Name</label>
                 <div className="input-wrapper">
-                  <User size={16} className="input-icon" />
-                  <input 
-                    type="text" 
+                  <User size={16} className="input-icon" aria-hidden="true" />
+                  <input
+                    id="contact-name"
+                    type="text"
                     name="name"
                     value={formState.name}
                     onChange={handleChange}
-                    placeholder="Your Name" 
-                    required 
+                    placeholder="Your Name"
+                    required
+                    autoComplete="name"
                     className="premium-input"
                   />
                 </div>
               </div>
 
               <div className="form-group">
+                <label htmlFor="contact-email" className="sr-only">Your Email</label>
                 <div className="input-wrapper">
-                  <Mail size={16} className="input-icon" />
-                  <input 
-                    type="email" 
+                  <Mail size={16} className="input-icon" aria-hidden="true" />
+                  <input
+                    id="contact-email"
+                    type="email"
                     name="email"
                     value={formState.email}
                     onChange={handleChange}
-                    placeholder="Your Email" 
-                    required 
+                    placeholder="Your Email"
+                    required
+                    autoComplete="email"
                     className="premium-input"
                   />
                 </div>
               </div>
 
               <div className="form-group">
+                <label htmlFor="contact-message" className="sr-only">Your Message</label>
                 <div className="input-wrapper textarea-wrapper">
-                  <MessageSquare size={16} className="input-icon" />
-                  <textarea 
+                  <MessageSquare size={16} className="input-icon" aria-hidden="true" />
+                  <textarea
+                    id="contact-message"
                     name="message"
                     value={formState.message}
                     onChange={handleChange}
-                    placeholder="Your Message" 
-                    required 
+                    placeholder="Your Message"
+                    required
                     className="premium-input premium-textarea"
                     rows="5"
                   />
@@ -149,6 +173,12 @@ const Contact = () => {
                 <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                 <Send size={16} className={isSubmitting ? 'sending-icon' : ''} />
               </button>
+
+              {status && (
+                <p role="status" className={`form-status form-status--${status.type}`}>
+                  {status.text}
+                </p>
+              )}
             </form>
           </motion.div>
         </div>

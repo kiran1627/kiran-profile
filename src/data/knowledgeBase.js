@@ -8,7 +8,7 @@ export const knowledgeBase = [
   {
     category: 'personal',
     title: 'About Kiran Babu Bandela',
-    content: `Kiran Babu Bandela is an AI/ML Engineer and Full Stack Developer based in India. He is currently pursuing a Bachelor of Technology (B.Tech) in Computer Science specializing in AI & ML (2022-2026). He is passionate about building intelligent solutions using modern AI frameworks and is dedicated to continuous learning and solving complex problems through data-driven approaches. He specializes in Generative AI, Large Language Models (LLMs), and Computer Vision.`,
+    content: `Kiran Babu Bandela is a GenAI/RAG Engineer pursuing a B.Tech in Artificial Intelligence & Machine Learning at JNTUH, Hyderabad (graduating May 2026). He owns the AI microservice behind SurakshaGrid, a public-safety platform live across 5 Telangana government departments, running a hybrid RAG pipeline (BM25 + Qdrant vector search, RRF fusion, BGE reranking) serving a self-hosted Qwen3-8B model. He also built SETU GRID, a real-time WebSocket coordination layer for that platform. He is targeting entry-level AI/ML or GenAI/RAG Engineer roles, with a long-term trajectory toward AI Architect.`,
   },
   {
     category: 'personal',
@@ -26,6 +26,18 @@ export const knowledgeBase = [
     category: 'skills',
     title: 'Web Development & Cloud Skills',
     content: `Web Development: React.js (modern interactive UIs), Node.js (scalable backend development), FastAPI (high-performance ML model serving), Streamlit (rapid AI/ML prototyping). Databases: PostgreSQL, MySQL, MongoDB. Cloud Platforms: Azure Cloud (AI services deployment), AWS Cloud (Bedrock, enterprise infrastructure), Google Cloud Platform (Vertex AI, cloud scaling). Tools: GitHub (collaborative development), Power BI (data visualization and BI reporting).`,
+  },
+
+  // ─── EXPERIENCE ──────────────────────────────────────────────
+  {
+    category: 'experience',
+    title: 'IT Intern — IKCON Digital IT Services (Jun 2026–Present)',
+    content: `Owns the AI microservice behind SurakshaGrid, a public-safety platform live across 5 Telangana government departments. Built the hybrid RAG pipeline: BM25 keyword search fused with Qdrant vector search via reciprocal rank fusion (RRF), reranked with a BGE cross-encoder, serving a self-hosted Qwen3-8B model. Integrated Gemini and OpenRouter as fallback LLM routes. Built SETU GRID, a real-time WebSocket coordination layer keeping department dashboards in sync without polling. Instrumented the service with Prometheus metrics and structured logging for observability.`,
+  },
+  {
+    category: 'experience',
+    title: 'AI Intern — Placemantra (Jan–Mar 2025)',
+    content: `Tuned PyTorch and TensorFlow models for a placement-matching pipeline, improving prediction accuracy by roughly 12%. Tracked experiments and model versions using MLflow.`,
   },
 
   // ─── PROJECTS ────────────────────────────────────────────────
@@ -67,8 +79,8 @@ export const knowledgeBase = [
   // ─── EDUCATION ───────────────────────────────────────────────
   {
     category: 'education',
-    title: 'Education',
-    content: `Bachelor of Technology (B.Tech) in Computer Science, specializing in Artificial Intelligence & Machine Learning. Duration: 2022-2026. Focused on Generative AI, LLMs, Deep Learning, Computer Vision, and Data Science.`,
+    title: 'Education & Certifications',
+    content: `B.Tech in Artificial Intelligence & Machine Learning, JNTUH, Hyderabad, graduating May 2026. Oracle Cloud Infrastructure Generative AI Professional certification. Oracle Cloud Infrastructure Data Science Professional certification.`,
   },
 
   // ─── AVAILABILITY ────────────────────────────────────────────

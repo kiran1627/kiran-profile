@@ -22,38 +22,39 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'Kiran Babu Bandela | AI Engineer & Full Stack Developer',
+  title: 'Kiran Babu Bandela | GenAI/RAG Engineer',
   description:
-    'Portfolio of Kiran Babu Bandela — AI/ML Engineer specializing in Generative AI, LLMs, Computer Vision, RAG Pipelines, and Full Stack Development. Building intelligent systems that matter.',
+    'Portfolio of Kiran Babu Bandela — GenAI/RAG Engineer building production AI systems: hybrid RAG pipelines, multi-agent orchestration, and LLM microservices.',
   keywords: [
-    'AI Engineer',
+    'GenAI Engineer',
+    'RAG Engineer',
+    'AI Architect',
+    'Retrieval Augmented Generation',
+    'Multi-Agent Orchestration',
+    'LangGraph',
+    'LangChain',
+    'Qdrant',
+    'LLM Microservices',
     'Machine Learning',
-    'Full Stack Developer',
-    'Generative AI',
-    'LLM Fine-tuning',
-    'RAG Pipeline',
-    'Computer Vision',
-    'PyTorch',
-    'TensorFlow',
-    'Next.js',
-    'React',
     'Kiran Babu Bandela',
   ],
   authors: [{ name: 'Kiran Babu Bandela' }],
   creator: 'Kiran Babu Bandela',
   openGraph: {
-    title: 'Kiran Babu Bandela | AI Engineer & Full Stack Developer',
+    title: 'Kiran Babu Bandela | GenAI/RAG Engineer',
     description:
-      'Explore the portfolio of Kiran Babu Bandela — AI/ML Engineer building intelligent systems with LLMs, Computer Vision, and Autonomous Agents.',
+      'GenAI/RAG Engineer building production AI systems: RAG pipelines, multi-agent orchestration, LLM microservices.',
     type: 'website',
     locale: 'en_US',
     siteName: 'Kiran Babu Bandela Portfolio',
+    images: ['/profile-fixed.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kiran Babu Bandela | AI Engineer',
+    title: 'Kiran Babu Bandela | GenAI/RAG Engineer',
     description:
-      'AI/ML Engineer specializing in Generative AI, LLMs, and Computer Vision.',
+      'GenAI/RAG Engineer building production AI systems: RAG pipelines, multi-agent orchestration, LLM microservices.',
+    images: ['/profile-fixed.png'],
   },
   robots: {
     index: true,

@@ -7,9 +7,9 @@ import './Navbar.css';
 
 const NAV_ITEMS = [
   { label: 'ABOUT', href: '#about' },
+  { label: 'EXPERIENCE', href: '#experience' },
   { label: 'PROJECTS', href: '#projects' },
   { label: 'SKILLS', href: '#skills' },
-  { label: 'BLOGS', href: '#blog' },
   { label: 'CONTACT', href: '#contact' },
 ];
 
@@ -55,7 +55,7 @@ const Navbar = () => {
           </div>
           <div className="logo-text">
             <span className="logo-name">KIRAN</span>
-            <span className="logo-title">AI ENGINEER</span>
+            <span className="logo-title">GENAI/RAG ENGINEER</span>
           </div>
         </a>
 
