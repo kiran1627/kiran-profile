@@ -53,9 +53,26 @@
   gap: 4px;
 }
 
-.footer-heart {
-  color: #FF006E;
-  display: inline;
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94A3B8;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-social-link:hover {
+  color: var(--primary, #00E5FF);
+  border-color: rgba(0, 229, 255, 0.3);
 }
 
 @media (max-width: 600px) {

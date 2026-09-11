@@ -8,24 +8,6 @@ import './Timeline.css';
 const TIMELINE_DATA = [
   {
     id: 1,
-    year: 'Jan 2025 – Mar 2025',
-    title: 'AI Intern',
-    subtitle: 'Placemantra',
-    description: 'Tuned PyTorch and TensorFlow models for a placement-matching pipeline, improving prediction accuracy by ~12%. Tracked experiments and model versions with MLflow.',
-    icon: <Briefcase size={20} />,
-    type: 'work'
-  },
-  {
-    id: 2,
-    year: 'Jun 2026 – Present',
-    title: 'IT Intern',
-    subtitle: 'IKCON Digital IT Services',
-    description: 'Own the AI microservice behind SurakshaGrid, a public-safety platform live across 5 Telangana government departments. Built the hybrid RAG pipeline (BM25 + Qdrant, RRF fusion, BGE reranking) serving a self-hosted Qwen3-8B, wired in Gemini/OpenRouter as fallback model routes, built SETU GRID (real-time WebSocket coordination layer), and instrumented the service with Prometheus metrics and structured logging.',
-    icon: <Briefcase size={20} />,
-    type: 'work'
-  },
-  {
-    id: 3,
     year: '2024',
     title: 'Innovation Marathon',
     subtitle: 'Finalist — TASK/SAP',
@@ -34,11 +16,42 @@ const TIMELINE_DATA = [
     type: 'award'
   },
   {
-    id: 4,
+    id: 2,
+    year: 'Jan 2025 – Mar 2025',
+    title: 'AI Intern',
+    subtitle: 'Placemantra',
+    bullets: [
+      'Tuned PyTorch and TensorFlow models for a placement-matching pipeline',
+      'Improved prediction accuracy by ~12%',
+      'Tracked experiments and model versions with MLflow',
+    ],
+    icon: <Briefcase size={20} />,
+    type: 'work'
+  },
+  {
+    id: 3,
     year: '2025',
     title: 'FinPilot',
     subtitle: 'Multi-Agent Finance Platform',
-    description: 'Architected and built FinPilot, a multi-agent finance platform on LangGraph, with a FastAPI backend and Next.js client.',
+    bullets: [
+      'Architected a multi-agent finance platform orchestrated with LangGraph',
+      'Built the FastAPI backend and Next.js client',
+    ],
+    icon: <Briefcase size={20} />,
+    type: 'work'
+  },
+  {
+    id: 4,
+    year: 'Jun 2026 – Present',
+    title: 'IT Intern',
+    subtitle: 'IKCON Digital IT Services',
+    bullets: [
+      'Own the AI microservice behind SurakshaGrid, live across 5 Telangana government departments',
+      'Built the hybrid RAG pipeline: BM25 + Qdrant vector search (RRF fusion), BGE reranking, serving a self-hosted Qwen3-8B',
+      'Integrated Gemini and OpenRouter as fallback LLM routes',
+      'Built SETU GRID, a real-time WebSocket coordination layer for department dashboards',
+      'Instrumented the service with Prometheus metrics and structured logging',
+    ],
     icon: <Briefcase size={20} />,
     type: 'work'
   }
@@ -109,7 +122,15 @@ const TimelineItem = ({ data, index }) => {
         <span className="timeline-year">{data.year}</span>
         <h3 className="timeline-title">{data.title}</h3>
         <h4 className="timeline-subtitle">{data.subtitle}</h4>
-        <p className="timeline-desc">{data.description}</p>
+        {data.bullets ? (
+          <ul className="timeline-bullets">
+            {data.bullets.map((bullet) => (
+              <li key={bullet}>{bullet}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="timeline-desc">{data.description}</p>
+        )}
       </div>
 
       <div className="timeline-node">

@@ -87,7 +87,7 @@
   font-size: clamp(2.2rem, 4.5vw, 3.5rem);
   font-weight: 900;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--text-primary);
   text-transform: uppercase;
   margin-bottom: 12px;
 }
@@ -97,7 +97,7 @@
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: 3px;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   text-transform: uppercase;
 }
 
@@ -226,7 +226,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   text-transform: uppercase;
 }
 
@@ -251,9 +251,42 @@
   font-size: 1.05rem;
   line-height: 1.8;
   letter-spacing: 0.3px;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-secondary);
   font-weight: 400;
   text-align: left;
+  margin-bottom: 32px;
+}
+
+/* Currently Focused On */
+.focus-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.focus-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.focus-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.focus-tag {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(0, 229, 255, 0.06);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  color: var(--primary);
 }
 
 /* Metrics Section */
@@ -318,7 +351,7 @@
   font-size: 2.2rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .metric-label {
@@ -326,7 +359,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-secondary);
   text-align: center;
   text-transform: uppercase;
 }
@@ -376,7 +409,7 @@
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   text-transform: uppercase;
 }
 

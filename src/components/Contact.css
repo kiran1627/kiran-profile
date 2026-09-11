@@ -113,14 +113,14 @@
   font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   letter-spacing: 0.5px;
 }
 
 .contact-info-value {
   font-family: var(--font-body);
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
 }
 
 .contact-card-border {
@@ -154,14 +154,14 @@
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .form-header p {
   font-family: var(--font-body);
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
 }
 
 .premium-contact-form {
@@ -188,7 +188,7 @@
 .input-icon {
   position: absolute;
   left: 16px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   transition: color 0.3s ease;
 }
 
@@ -200,9 +200,9 @@
   width: 100%;
   padding: 16px 16px 16px 48px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 0.9rem;
   outline: none;
@@ -215,7 +215,7 @@
 }
 
 .premium-input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-muted);
 }
 
 .premium-input:focus {
@@ -238,7 +238,7 @@
   border-radius: 12px;
   background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(139, 92, 246, 0.1));
   border: 1px solid rgba(0, 229, 255, 0.3);
-  color: #fff;
+  color: var(--text-primary);
   font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: 1px;

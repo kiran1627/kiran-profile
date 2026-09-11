@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Menu, X, Download } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, X, Download } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 import './Navbar.css';
 
 const NAV_ITEMS = [
@@ -40,13 +41,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   return (
-    <motion.nav
-      className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-    >
+    <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="nav-container">
         {/* Logo */}
         <a href="#hero" className="nav-logo">
@@ -82,6 +87,7 @@ const Navbar = () => {
 
         {/* Desktop CTA */}
         <div className="nav-actions">
+          <ThemeToggle />
           <a href="/Kiran_Resume.pdf" className="nav-cv-btn" target="_blank" rel="noopener noreferrer">
             <Download size={14} />
             <span>Resume</span>
@@ -89,13 +95,17 @@ const Navbar = () => {
         </div>
 
         {/* Mobile toggle */}
-        <button
-          className="mobile-toggle"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="mobile-actions">
+          <ThemeToggle />
+          <button
+            className="mobile-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -134,7 +144,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 };
 

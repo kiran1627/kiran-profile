@@ -102,6 +102,44 @@
   line-height: 1.6;
 }
 
+.timeline-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.timeline-bullets li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.timeline-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.timeline-item-left .timeline-bullets li {
+  padding-left: 0;
+  padding-right: 18px;
+}
+
+.timeline-item-left .timeline-bullets li::before {
+  left: auto;
+  right: 0;
+}
+
 /* Center Node */
 .timeline-node {
   position: absolute;
@@ -125,7 +163,7 @@
 }
 
 .timeline-icon {
-  color: white;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;

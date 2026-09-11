@@ -74,6 +74,84 @@
   --font-body: var(--font-inter), 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --nav-height: 80px;
+
+  /* legacy aliases used by a couple of older component stylesheets */
+  --bg-dark: var(--bg-primary);
+  --text-main: var(--text-primary);
+  --accent: var(--highlight);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT THEME — toggled via [data-theme="light"] on <html>
+   ═══════════════════════════════════════════════════════════ */
+:root[data-theme='light'] {
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #F2F2F3;
+  --bg-dark: #FAFAFA;
+  --surface: #FFFFFF;
+  --glass-surface: rgba(10, 10, 20, 0.03);
+  --glass-border: rgba(10, 10, 20, 0.1);
+  --primary: #0092A0;
+  --primary-dark: #007580;
+  --primary-glow: rgba(0, 146, 160, 0.25);
+  --secondary: #2563EB;
+  --highlight: #7C3AED;
+  --accent: #7C3AED;
+  --text-primary: #0F1115;
+  --text-main: #0F1115;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+  --success: #059669;
+  --warning: #B45309;
+  --shadow-sm: 0 4px 12px rgba(15, 17, 21, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 17, 21, 0.08);
+  --shadow-lg: 0 20px 60px rgba(15, 17, 21, 0.12);
+  --shadow-glow: 0 0 40px rgba(0, 146, 160, 0.15);
+
+  /* Tailwind @theme-generated tokens (same properties, re-declared for light mode) */
+  --color-bg-primary: #FAFAFA;
+  --color-bg-secondary: #F2F2F3;
+  --color-surface: #FFFFFF;
+  --color-glass-surface: rgba(10, 10, 20, 0.03);
+  --color-glass-border: rgba(10, 10, 20, 0.1);
+  --color-primary: #0092A0;
+  --color-primary-dark: #007580;
+  --color-primary-glow: rgba(0, 146, 160, 0.25);
+  --color-secondary: #2563EB;
+  --color-secondary-glow: rgba(37, 99, 235, 0.18);
+  --color-highlight: #7C3AED;
+  --color-text-primary: #0F1115;
+  --color-text-secondary: #4B5563;
+  --color-text-muted: #6B7280;
+  --color-success: #059669;
+  --color-warning: #B45309;
+  --color-border-subtle: rgba(10, 10, 20, 0.1);
+  --color-border-glow: rgba(0, 146, 160, 0.18);
+}
+
+:root[data-theme='light'] body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Cards/panels that hardcode white-on-dark borders and fills still read
+   correctly in light mode because they consume the tokens above; components
+   using raw rgba(255,255,255,*) literals are patched individually below. */
+:root[data-theme='light'] .hero-bg-overlay {
+  background: linear-gradient(180deg, rgba(250, 250, 250, 0.82) 0%, rgba(250, 250, 250, 0.94) 70%, var(--bg-primary) 100%);
+}
+
+:root[data-theme='light'] .hero-btn-primary {
+  color: #fff;
+}
+
+:root[data-theme='light'] .navbar-scrolled {
+  background: rgba(250, 250, 250, 0.85);
+  border-bottom-color: rgba(10, 10, 20, 0.08);
+}
+
+:root[data-theme='light'] .logo-mark {
+  color: #fff;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -282,7 +360,7 @@ ul {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 900;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--text-primary);
   text-transform: uppercase;
   line-height: 1.1;
   margin-bottom: 16px;
@@ -347,87 +425,6 @@ ul {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   BUTTONS
-   ═══════════════════════════════════════════════════════════ */
-.btn-primary {
-  padding: 14px 32px;
-  border-radius: 50px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-  color: #000;
-  font-weight: 700;
-  font-size: 0.95rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 20px var(--primary-glow),
-    0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-.btn-primary:hover::before {
-  opacity: 1;
-}
-
-.btn-outline {
-  padding: 14px 32px;
-  border-radius: 50px;
-  background: transparent;
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 0.95rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn-outline:hover {
-  background: rgba(0, 240, 255, 0.08);
-  border-color: var(--primary);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-.btn-pill {
-  padding: 12px 28px;
-  border-radius: 50px;
-  background: var(--primary);
-  color: #000;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px var(--primary-glow);
-}
-
-/* ═══════════════════════════════════════════════════════════
    GLOW EFFECTS
    ═══════════════════════════════════════════════════════════ */
 .glow-line {
@@ -469,7 +466,7 @@ ul {
    ═══════════════════════════════════════════════════════════ */
 ::selection {
   background: rgba(0, 240, 255, 0.2);
-  color: #fff;
+  color: var(--text-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════

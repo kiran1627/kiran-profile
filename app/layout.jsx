@@ -22,6 +22,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://kiran-profile-delta.vercel.app'),
+  alternates: { canonical: '/' },
   title: 'Kiran Babu Bandela | GenAI/RAG Engineer',
   description:
     'Portfolio of Kiran Babu Bandela — GenAI/RAG Engineer building production AI systems: hybrid RAG pipelines, multi-agent orchestration, and LLM microservices.',
@@ -68,6 +70,11 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="theme-color" content="#030014" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
       </head>
       <body>{children}</body>
     </html>

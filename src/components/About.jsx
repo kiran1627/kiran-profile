@@ -29,6 +29,14 @@ const METRICS = [
   { number: '8B', label: 'Param Model Self-Hosted', delay: 0.2 },
 ];
 
+const FOCUS_AREAS = [
+  'Generative AI',
+  'RAG Systems',
+  'Multi-Agent Systems',
+  'Backend Engineering',
+  'AI Application Architecture',
+];
+
 const About = () => {
   const completeStory = `I own the AI microservice behind SurakshaGrid, a public-safety platform running live across 5 Telangana government departments. It runs a hybrid retrieval pipeline — BM25 keyword search fused with Qdrant vector search via reciprocal rank fusion, then reranked with a BGE cross-encoder — serving a self-hosted Qwen3-8B model for grounded, low-hallucination responses.
 
@@ -111,6 +119,21 @@ Currently targeting an entry-level AI/ML or GenAI/RAG Engineer role, with a long
               >
                 {completeStory}
               </motion.p>
+
+              <motion.div
+                className="focus-block"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+              >
+                <span className="focus-label">CURRENTLY FOCUSED ON</span>
+                <div className="focus-tag-list">
+                  {FOCUS_AREAS.map((area) => (
+                    <span key={area} className="focus-tag">{area}</span>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 

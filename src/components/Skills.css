@@ -5,9 +5,8 @@
 .skills-orbit-section {
   position: relative;
   width: 100%;
-  min-height: 100vh;
   padding: 120px 0 100px 0;
-  background: #030014;
+  background: var(--bg-secondary);
   overflow: hidden;
   z-index: 2;
   display: flex;
@@ -72,7 +71,7 @@
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-secondary);
 }
 
 .skills-gradient-bottom {
