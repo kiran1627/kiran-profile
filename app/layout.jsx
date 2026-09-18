@@ -1,25 +1,8 @@
 import './globals.css';
 import '../src/index.css';
 import '../src/App.css';
-import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-heading',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
+// Fonts are served as local woff2 files via @font-face in globals.css
+// (Anton, Oswald, Bodoni Moda — copied from the cinematic-portofilo reference)
 
 export const metadata = {
   metadataBase: new URL('https://kiran-profile-delta.vercel.app'),
@@ -66,7 +49,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="theme-color" content="#030014" />

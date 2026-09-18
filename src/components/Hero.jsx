@@ -1,106 +1,124 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
+import EmberCanvas from './EmberCanvas';
 import './Hero.css';
 
-const PIPELINE_NODES = ['USER', 'AI AGENT', 'RAG', 'VECTOR DB', 'TOOLS / MCP', 'API', 'RESPONSE'];
-
 const SOCIAL_LINKS = [
-  { name: 'GitHub', icon: Github, url: 'https://github.com/kiran1627' },
+  { name: 'GitHub',   icon: Github,   url: 'https://github.com/kiran1627' },
   { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/in/kiranbabu18' },
-  { name: 'Email', icon: Mail, url: 'mailto:kiranbabubandela6@gmail.com' },
+  { name: 'Email',    icon: Mail,     url: 'mailto:kiranbabubandela6@gmail.com' },
 ];
 
-const scrollToId = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-};
-
-const PipelineVisual = () => (
-  <div className="hero-pipeline" aria-hidden="true">
-    {PIPELINE_NODES.map((node, i) => (
-      <React.Fragment key={node}>
-        <div className="hero-pipeline-node" style={{ animationDelay: `${i * 0.12}s` }}>
-          <span className="hero-pipeline-dot" />
-          <span className="hero-pipeline-label">{node}</span>
-        </div>
-        {i < PIPELINE_NODES.length - 1 && (
-          <div className="hero-pipeline-line" style={{ animationDelay: `${i * 0.12 + 0.06}s` }} />
-        )}
-      </React.Fragment>
+/* Arrow triangles rendered as CSS border trick */
+const Arrows = ({ side }) => (
+  <div className={`cine-arrows cine-arrows--${side}`} aria-hidden="true">
+    {[0, 1, 2, 3, 4].map((i) => (
+      <i key={i} style={{ '--i': i }} />
     ))}
   </div>
 );
 
-const Hero = () => {
+/* Bottom-right dot grid */
+const DotGrid = () => {
+  const dots = Array.from({ length: 40 });
   return (
-    <section id="hero" className="hero-section">
+    <div className="cine-grid-dots cine-grid-dots--br" aria-hidden="true">
+      {dots.map((_, i) => <i key={i} style={{ '--i': i }} />)}
+    </div>
+  );
+};
+
+const Hero = () => {
+  const [ready, setReady] = useState(false);
+  const [welcomed, setWelcomed] = useState(false);
+  const [chipsIn, setChipsIn] = useState(false);
+  const [arrowsIn, setArrowsIn] = useState(false);
+  const [dotsIn, setDotsIn] = useState(false);
+
+  useEffect(() => {
+    // Staggered cinematic entrance (matching reference timeline cues)
+    const t1 = setTimeout(() => setReady(true),    350);
+    const t2 = setTimeout(() => setWelcomed(true), 900);
+    const t3 = setTimeout(() => setChipsIn(true),  2400);
+    const t4 = setTimeout(() => setArrowsIn(true), 2800);
+    const t5 = setTimeout(() => setDotsIn(true),   3200);
+    return () => [t1, t2, t3, t4, t5].forEach(clearTimeout);
+  }, []);
+
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  return (
+    <section id="hero" className="cine-hero">
+      {/* Background video */}
       <video
-        className="hero-bg-video"
+        className="cine-hero__video"
         src="/hero.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
+        autoPlay loop muted playsInline preload="auto"
         aria-hidden="true"
       />
-      <div className="hero-bg-overlay" />
-      <div className="hero-bg-grid" />
+      <div className="cine-hero__veil" aria-hidden="true" />
+      <EmberCanvas color="255,140,70" density={40} className="cine-hero__embers" />
 
-      <div className="section-container hero-inner">
-        <div className="hero-copy">
-          <p className="hero-eyebrow">AI/ML ENGINEER</p>
+      {/* ── Furniture layer ── */}
+      <div className={`cine-furniture${ready ? ' is-ready' : ''}`} aria-hidden="true">
 
-          <h1 className="hero-name">KIRAN BABU BANDELA</h1>
+        {/* Welcome strip */}
+        <p className={`cine-welcome${welcomed ? ' is-welcome' : ''}`}>
+          <b className="cine-welcome__dots">•••</b>
+          <span className="cine-welcome__text">Welcome to my world</span>
+          <b className="cine-welcome__dots">•••</b>
+        </p>
 
-          <p className="hero-tags">GenAI &middot; RAG &middot; Agentic AI &middot; MCP</p>
+        {/* Chips */}
+        <p className={`cine-chip cine-chip--l${chipsIn ? ' is-in' : ''}`}>
+          <span>• AI Engineer Kiran •</span>
+        </p>
+        <p className={`cine-chip cine-chip--r${chipsIn ? ' is-in' : ''}`}>
+          <span>• Builder •</span>
+        </p>
 
-          <p className="hero-description">
-            I build intelligent software systems using modern AI, backend engineering,
-            retrieval systems, and tool-integrated workflows.
-          </p>
+        {/* Edge arrows */}
+        {arrowsIn && <Arrows side="l" />}
+        {arrowsIn && <Arrows side="r" />}
 
-          <div className="hero-ctas">
-            <button onClick={() => scrollToId('projects')} className="hero-btn-primary">
-              View Projects <ArrowRight size={16} className="hero-btn-arrow" />
-            </button>
-            <a href="/Kiran_Resume.pdf" className="hero-btn-secondary" target="_blank" rel="noopener noreferrer">
-              <Download size={15} /> Download Resume
-            </a>
-          </div>
+        {/* Dot grid */}
+        {dotsIn && <DotGrid />}
+      </div>
 
-          <div className="hero-socials">
-            {SOCIAL_LINKS.map((link) => {
-              const Icon = link.icon;
-              return (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.name}
-                  className="hero-social-link"
-                >
-                  <Icon size={18} />
-                </a>
-              );
-            })}
-          </div>
+      {/* ── Hero wordmark ── */}
+      <div className="cine-hero__center">
+        <h1 className="cine-hero__name">KIRAN<br />BABU<br />BANDELA</h1>
+        <p className="cine-hero__role">AI / ML Engineer</p>
+        <p className="cine-hero__tags">GenAI &middot; RAG &middot; Agentic AI &middot; MCP</p>
+
+        <div className="cine-hero__ctas">
+          <button onClick={() => scrollTo('projects')} className="cine-btn-primary">
+            View Projects <ArrowRight size={15} />
+          </button>
+          <a href="/Kiran_Resume.pdf" className="cine-btn-secondary" target="_blank" rel="noopener noreferrer">
+            <Download size={14} /> Resume
+          </a>
         </div>
 
-        <div className="hero-visual">
-          <PipelineVisual />
+        <div className="cine-hero__socials">
+          {SOCIAL_LINKS.map(({ name, icon: Icon, url }) => (
+            <a key={name} href={url} target="_blank" rel="noopener noreferrer" aria-label={name} className="cine-hero__social">
+              <Icon size={17} />
+            </a>
+          ))}
         </div>
       </div>
 
+      {/* ── Scroll indicator ── */}
       <button
-        className="hero-scroll-indicator"
-        onClick={() => scrollToId('about')}
+        className="cine-scroll-hint"
+        onClick={() => scrollTo('about')}
         aria-label="Scroll to explore"
         type="button"
       >
-        <span className="hero-scroll-line" />
+        <span className="cine-scroll-hint__line" />
         <span>SCROLL</span>
       </button>
     </section>

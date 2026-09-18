@@ -1,87 +1,233 @@
-/* ═══════════════════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════════════════ */
+/* ==========================================================================
+   FOOTER — "Finale" cinematic style
+   Matched to finale.css from cinematic-portofilo reference
+   ========================================================================== */
 
-.footer {
+.cine-fin {
   position: relative;
-  padding: 40px 24px;
+  min-height: 100svh;
+  background: #000;
+  overflow: hidden;
 }
 
-.footer-glow-line {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), rgba(139, 92, 246, 0.3), transparent);
-  margin-bottom: 40px;
-}
-
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-left {
+.fin__inner {
+  position: relative;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.footer-logo {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 3px;
-  background: linear-gradient(135deg, #fff, #00F0FF);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Deep crimson gradient background */
+.fin__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 60%, rgba(140,10,10,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 30% 20%, rgba(100,5,5,.1) 0%, transparent 60%);
+  pointer-events: none;
 }
 
-.footer-tagline {
-  font-size: 0.72rem;
-  color: #64748B;
+.fin__embers {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
 }
 
-.footer-copy {
-  font-size: 0.78rem;
-  color: #64748B;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+/* ==========================================================================
+   Editorial captions
+   ========================================================================== */
+.f-cap {
+  position: absolute;
+  margin: 0;
+  z-index: 4;
+  font-family: var(--ui);
+  font-size: clamp(8px, .72vw, 12px);
+  font-weight: 400;
+  line-height: 2.1;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: rgba(233,220,208,.72);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 1s ease calc(var(--li, 0) * .15s),
+    transform 1.2s cubic-bezier(.22, 1, .36, 1) calc(var(--li, 0) * .15s);
+  pointer-events: none;
+}
+.cine-fin.is-caps .f-cap { opacity: 1; transform: none; }
+
+.f-cap--tl {
+  top: clamp(22px, 6vh, 58px);
+  left: clamp(24px, 3.6vw, 62px);
+  padding-left: 1.2em;
+  border-left: 2px solid #b3271d;
+}
+.f-cap--quote {
+  top: 35%;
+  left: clamp(24px, 3.2vw, 56px);
+  font-family: var(--ui);
+  font-size: clamp(12px, 1.1vw, 18px);
+  letter-spacing: .34em;
+  color: rgba(240,230,220,.9);
+  font-style: normal;
+}
+.f-cap--quote::after {
+  content: '';
+  display: block;
+  width: 2.1em;
+  height: 2px;
+  margin-top: 1.5em;
+  background: #b3271d;
+}
+.f-cap--blw {
+  bottom: clamp(80px, 13vh, 130px);
+  left: clamp(24px, 3.6vw, 62px);
+  padding-left: 1.2em;
+  border-left: 2px solid #b3271d;
+}
+.f-cap--tr {
+  top: clamp(22px, 6vh, 58px);
+  right: clamp(24px, 3.6vw, 62px);
+  text-align: right;
+}
+.f-cap--tr::after, .f-cap--br::after {
+  content: '';
+  display: block;
+  width: 1.8em;
+  height: 2px;
+  margin-top: 1.2em;
+  background: #b3271d;
+  margin-left: auto;
+}
+.f-cap--br {
+  bottom: clamp(80px, 13vh, 130px);
+  right: clamp(24px, 3.6vw, 62px);
+  text-align: right;
 }
 
-.footer-socials {
-  display: flex;
-  gap: 10px;
-}
-
-.footer-social-link {
+/* ==========================================================================
+   Large wordmark — centred, red grunge
+   ========================================================================== */
+.fin__wordmark {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #94A3B8;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.fin__wordmark span {
+  font-family: var(--disp);
+  font-size: clamp(80px, 20vw, 220px);
+  letter-spacing: .06em;
+  line-height: 1;
+  background-image: linear-gradient(180deg, #f2ece6 0%, #f2ece6 30%, #c4392f 68%, #7a1a14 100%), url('/tex/grunge.png');
+  background-size: 100% 100%, 500px;
+  background-blend-mode: normal, multiply;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: saturate(1.15) contrast(1.1);
+  opacity: .32;
 }
 
-.footer-social-link:hover {
-  color: var(--primary, #00E5FF);
-  border-color: rgba(0, 229, 255, 0.3);
+/* ==========================================================================
+   Portrait — overlaps the wordmark, left-of-center, duotone-toned
+   ========================================================================== */
+.fin__portrait {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: min(78svh, 720px);
+  width: auto;
+  max-width: 60vw;
+  transform: translateX(-72%);
+  object-fit: contain;
+  object-position: bottom;
+  z-index: 3;
+  pointer-events: none;
+  filter: grayscale(1) contrast(1.15) brightness(.62) sepia(1) saturate(3.6) hue-rotate(-40deg);
+  -webkit-mask-image: linear-gradient(to top, black 62%, transparent 98%);
+  mask-image: linear-gradient(to top, black 62%, transparent 98%);
+  opacity: 0;
+  transition: opacity 1.4s ease .2s;
+}
+.cine-fin.is-caps .fin__portrait { opacity: .92; }
+
+@media (max-width: 720px) {
+  .fin__portrait {
+    max-width: 82vw;
+    height: min(58svh, 460px);
+    transform: translateX(-50%);
+  }
 }
 
-@media (max-width: 600px) {
-  .footer-container {
+@media (prefers-reduced-motion: reduce) {
+  .fin__portrait { transition: none; }
+}
+
+/* ==========================================================================
+   Bottom functional bar
+   ========================================================================== */
+.fin__bar {
+  position: absolute;
+  z-index: 7;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px clamp(20px, 3.6vw, 62px) 20px;
+  font-family: var(--ui);
+  font-size: clamp(8px, .66vw, 11px);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(216,186,174,.5);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1s ease .6s, transform 1.2s cubic-bezier(.22,1,.36,1) .6s;
+}
+.cine-fin.is-bar .fin__bar { opacity: 1; transform: none; }
+
+.fin__bar a {
+  color: rgba(233,220,208,.7);
+  text-decoration: none;
+  transition: color .35s ease, text-shadow .35s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.fin__bar a:hover,
+.fin__bar a:focus-visible {
+  color: #f4ecdd;
+  text-shadow: 0 0 14px rgba(220,60,40,.55);
+  outline: none;
+}
+
+.fin__soc {
+  display: flex;
+  gap: 2.4em;
+}
+.fin__c { font-size: inherit; letter-spacing: .24em; }
+
+/* ==========================================================================
+   Portrait / mobile
+   ========================================================================== */
+@media (max-width: 760px) {
+  .f-cap--tl, .f-cap--tr, .f-cap--blw, .f-cap--br { display: none; }
+  .f-cap--quote { top: auto; bottom: 22vh; font-size: clamp(13px, 4vw, 18px); }
+  .fin__bar {
     flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-left {
     align-items: center;
+    gap: 12px;
+    padding-bottom: 24px;
   }
+  .fin__wordmark span { font-size: clamp(60px, 22vw, 140px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .f-cap, .fin__bar { transition-duration: .01ms; transition-delay: 0s; }
 }

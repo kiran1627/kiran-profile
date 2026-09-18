@@ -1,336 +1,345 @@
-.hero-section {
+/* ==========================================================================
+   KIRAN — Cinematic Hero
+   Matched to gireeshkumarreddy/cinematic-portofilo reference hero style
+   ========================================================================== */
+
+.cine-hero {
   position: relative;
-  min-height: 100svh;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #000;
   display: flex;
   align-items: center;
-  padding: 120px 0 80px;
-  background: var(--bg-primary);
-  overflow: hidden;
+  justify-content: center;
 }
 
-.hero-bg-video {
+/* ── Background video ─────────────────────────────────────────────────── */
+.cine-hero__video {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  opacity: 0.28;
+  object-position: 50% 40%;
+  opacity: .55;
+  display: block;
+}
+
+.cine-hero__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.45) 0%,
+    rgba(0,0,0,.15) 50%,
+    rgba(0,0,0,.65) 100%
+  );
   pointer-events: none;
 }
 
-.hero-bg-overlay {
+.ember-canvas {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(5, 5, 5, 0.75) 0%, rgba(5, 5, 5, 0.92) 70%, var(--bg-primary) 100%);
+  z-index: 3;
   pointer-events: none;
-}
-
-.hero-bg-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
-  pointer-events: none;
+  display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-bg-video {
-    display: none;
-  }
+  .ember-canvas { opacity: .5; }
 }
 
-/* Dark footage under a light wash reads as a muddy smudge, not a subtle
-   background — hide it in light mode rather than show a washed-out artifact. */
-:root[data-theme='light'] .hero-bg-video {
-  display: none;
+/* ── Furniture layer (absolute over video) ───────────────────────────── */
+.cine-furniture {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
 }
 
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 56px;
+/* ── Welcome strip ────────────────────────────────────────────────────── */
+.cine-welcome {
+  position: absolute;
+  top: 17.5%;
+  left: 50%;
+  z-index: 4;
+  margin: 0;
+  display: flex;
   align-items: center;
-}
-
-/* ─── Copy column — always visible by default, no JS dependency ─── */
-.hero-copy {
-  opacity: 1;
-  visibility: visible;
-  max-width: 640px;
-}
-
-.hero-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  gap: .55em;
+  white-space: nowrap;
+  font-family: var(--ui);
+  font-size: clamp(11px, 1vw, 17px);
   font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--primary);
+  letter-spacing: .19em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  color: #fff;
+  text-shadow:
+    0 0 .06em rgba(0,0,0,.95),
+    0 0 .55em rgba(0,0,0,.92),
+    0 0 1.4em rgba(0,0,0,.75);
+  transform: translate(-50%, calc(-140% - 12px));
+  opacity: 0;
+  filter: blur(6px);
+}
+.cine-welcome__dots { letter-spacing: .12em; font-size: .96em; }
+.cine-welcome.is-welcome {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate(-50%, -50%);
+  transition:
+    transform .82s cubic-bezier(.14,.86,.22,1.06),
+    opacity .34s ease-out,
+    filter .5s var(--ease-out);
 }
 
-.hero-name {
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-  color: var(--text-primary);
-  margin-bottom: 18px;
-}
-
-.hero-tags {
-  font-family: var(--font-mono);
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-  color: var(--text-secondary);
-  margin-bottom: 24px;
-}
-
-.hero-description {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  max-width: 540px;
-  margin-bottom: 36px;
-}
-
-.hero-ctas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 36px;
-}
-
-.hero-btn-primary,
-.hero-btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 26px;
-  border-radius: 10px;
-  font-size: 0.95rem;
+/* ── Chips ────────────────────────────────────────────────────────────── */
+.cine-chip {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  padding: .30em .5em .24em;
+  background: var(--paper);
+  color: #060606;
+  font-family: var(--ui);
+  font-size: clamp(9px, .85vw, 13px);
   font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-  border: 1px solid transparent;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+}
+.cine-chip--l {
+  left: 1.5%;
+  top: 68.8%;
+  transform: translateX(-118%);
+}
+.cine-chip--r {
+  left: 88%;
+  top: 26.8%;
+  transform: translateX(118%);
+}
+.cine-chip--l.is-in,
+.cine-chip--r.is-in {
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform .78s var(--ease-out), opacity .3s linear;
 }
 
-.hero-btn-primary {
-  background: var(--primary);
-  color: #05070a;
-  border-color: var(--primary);
-}
-
-.hero-btn-primary:hover {
-  transform: translateY(-2px);
-  background: var(--primary-dark, var(--primary));
-}
-
-.hero-btn-arrow {
-  transition: transform 0.2s ease;
-}
-
-.hero-btn-primary:hover .hero-btn-arrow {
-  transform: translateX(3px);
-}
-
-.hero-btn-secondary {
-  background: transparent;
-  color: var(--text-primary);
-  border-color: var(--text-muted);
-}
-
-.hero-btn-secondary:hover {
-  transform: translateY(-2px);
-  border-color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.hero-socials {
+/* ── Edge arrows ──────────────────────────────────────────────────────── */
+.cine-arrows {
+  position: absolute;
+  top: 34.5%;
+  height: 28%;
   display: flex;
-  gap: 14px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cine-arrows--l { left: 1.8%; }
+.cine-arrows--r { left: 97.5%; }
+.cine-arrows i {
+  display: block;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 11px;
+  border-color: transparent transparent transparent var(--paper);
+  opacity: 0;
+  animation: arrowIn .62s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * .06s);
+}
+.cine-arrows--r i {
+  animation-delay: calc((4 - var(--i)) * .06s);
+}
+@keyframes arrowIn {
+  from { opacity: 0; transform: translateX(-26px); }
+  to   { opacity: .92; transform: none; }
+}
+.cine-arrows--r i { transform: none; }
+@keyframes arrowInR {
+  from { opacity: 0; transform: translateX(26px); }
+  to   { opacity: .92; transform: none; }
+}
+.cine-arrows--r i { animation-name: arrowInR; }
+
+/* ── Dot grid ─────────────────────────────────────────────────────────── */
+.cine-grid-dots {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+}
+.cine-grid-dots--br {
+  right: 1.6%; bottom: 5%;
+}
+.cine-grid-dots i {
+  display: block;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  animation: dotIn .5s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * .022s);
+  opacity: 0;
+}
+@keyframes dotIn {
+  from { opacity: 0; transform: scale(.2); }
+  to   { opacity: .95; transform: none; }
 }
 
-.hero-social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-secondary);
-  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-.hero-social-link:hover {
-  color: var(--primary);
-  border-color: rgba(0, 229, 255, 0.35);
-  transform: translateY(-2px);
-}
-
-/* ─── Visual column: subtle AI pipeline diagram ─── */
-.hero-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-pipeline {
+/* ==========================================================================
+   Wordmark / hero center
+   ========================================================================== */
+.cine-hero__center {
+  position: relative;
+  z-index: 15;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
-  width: 100%;
-  max-width: 260px;
+  text-align: center;
+  gap: clamp(10px, 1.5vh, 20px);
 }
 
-.hero-pipeline-node {
+.cine-hero__name {
+  font-family: var(--disp);
+  font-size: clamp(52px, 10vw, 130px);
+  line-height: .95;
+  letter-spacing: .04em;
+  /* Red grunge — matched to reference's wordmark */
+  background-color: var(--ink);
+  background-image: url('/tex/grunge.png');
+  background-size: 400px;
+  background-blend-mode: multiply;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: saturate(1.4) contrast(1.18) brightness(1.2);
+  text-shadow: none;
+  margin: 0;
+}
+
+.cine-hero__role {
+  font-family: var(--ui);
+  font-size: clamp(10px, .9vw, 14px);
+  font-weight: 500;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin: 0;
+}
+
+.cine-hero__tags {
+  font-family: var(--ui);
+  font-size: clamp(11px, .9vw, 14px);
+  font-weight: 400;
+  letter-spacing: .18em;
+  color: rgba(237,237,237,.55);
+  margin: 0;
+}
+
+/* ── CTAs ─────────────────────────────────────────────────────────────── */
+.cine-hero__ctas {
   display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 6px;
+}
+.cine-btn-primary {
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.02);
-  width: 100%;
-  opacity: 0;
-  animation: hero-node-in 0.6s ease forwards;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--ui);
+  font-size: clamp(9px, .72vw, 11px);
+  font-weight: 600;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .3s ease, letter-spacing .3s ease;
 }
-
-.hero-pipeline-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--primary);
-  box-shadow: 0 0 8px var(--primary-glow);
-  flex-shrink: 0;
+.cine-btn-primary:hover { background: var(--ink-hot); letter-spacing: .34em; }
+.cine-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 26px;
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--ui);
+  font-size: clamp(9px, .72vw, 11px);
+  font-weight: 500;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(237,237,237,.28);
+  transition: border-color .3s ease, background .3s ease;
 }
+.cine-btn-secondary:hover { border-color: var(--ink); background: rgba(222,27,28,.08); }
 
-.hero-pipeline-label {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 1.5px;
-  color: var(--text-secondary);
+/* ── Social links ─────────────────────────────────────────────────────── */
+.cine-hero__socials {
+  display: flex;
+  gap: 18px;
+  margin-top: 4px;
 }
-
-.hero-pipeline-line {
-  width: 1px;
-  height: 24px;
-  background: linear-gradient(180deg, rgba(0, 229, 255, 0.4), rgba(255, 255, 255, 0.06));
-  opacity: 0;
-  animation: hero-line-in 0.4s ease forwards;
+.cine-hero__social {
+  color: var(--dim);
+  transition: color .35s ease;
 }
+.cine-hero__social:hover { color: var(--paper); }
 
-@keyframes hero-node-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes hero-line-in {
-  to {
-    opacity: 1;
-  }
-}
-
-/* ─── Scroll indicator ─── */
-.hero-scroll-indicator {
+/* ── Scroll hint ──────────────────────────────────────────────────────── */
+.cine-scroll-hint {
   position: absolute;
-  bottom: 28px;
+  bottom: clamp(20px, 4vh, 40px);
   left: 50%;
   transform: translateX(-50%);
+  z-index: 15;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   background: none;
   border: none;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 2px;
   cursor: pointer;
-  z-index: 1;
+  color: var(--dim);
+  font-family: var(--ui);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .34em;
+  text-transform: uppercase;
 }
-
-.hero-scroll-line {
+.cine-scroll-hint__line {
+  display: block;
   width: 1px;
-  height: 28px;
-  background: linear-gradient(180deg, var(--primary), transparent);
+  height: 40px;
+  background: var(--dim);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: .3; transform: scaleY(1); }
+  50%       { opacity: .9; transform: scaleY(1.4); }
+}
+.cine-scroll-hint:hover { color: var(--paper); }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 760px) {
+  .cine-chip--l,
+  .cine-chip--r,
+  .cine-arrows { display: none; }
+
+  .cine-hero__name { font-size: clamp(44px, 14vw, 80px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-pipeline-node,
-  .hero-pipeline-line {
-    animation: none;
-    opacity: 1;
-  }
-}
-
-@media (min-width: 992px) {
-  .hero-inner {
-    grid-template-columns: 1.1fr 0.7fr;
-    gap: 40px;
-  }
-
-  .hero-pipeline {
-    max-width: 280px;
-  }
-}
-
-@media (max-width: 767px) {
-  /* Compact horizontal chip row instead of a tall stacked list — the
-     vertical pipeline reads fine on desktop but ate a full extra
-     screen of scroll on phones before any real content. */
-  .hero-pipeline {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    max-width: 100%;
-  }
-
-  .hero-pipeline-node {
-    width: auto;
-    padding: 7px 12px;
-  }
-
-  .hero-pipeline-label {
-    font-size: 0.68rem;
-  }
-
-  .hero-pipeline-line {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-section {
-    padding: 100px 0 72px;
-  }
-
-  .hero-ctas {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .hero-btn-primary,
-  .hero-btn-secondary {
-    justify-content: center;
-  }
-
-  .hero-visual {
-    margin-top: 8px;
+  .cine-welcome, .cine-chip, .cine-arrows i, .cine-grid-dots i {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
   }
 }

@@ -1,251 +1,251 @@
-/* ═══════════════════════════════════════════════════════════
-   NAVBAR — Cinematic Glassmorphism
-   ═══════════════════════════════════════════════════════════ */
+/* ==========================================================================
+   KIRAN — Cinematic Header
+   Matched to gireeshkumarreddy/cinematic-portofilo reference header style
+   ========================================================================== */
 
-.navbar {
+/* ── Layout ────────────────────────────────────────────────────────────── */
+.hdr {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  padding: 16px 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.navbar-scrolled {
-  background: rgba(3, 0, 20, 0.85);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border-bottom: 1px solid rgba(0, 240, 255, 0.06);
-  padding: 10px 0;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
+  top: 0; left: 0; right: 0;
+  height: var(--hdr-h);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: clamp(12px, 1.6vw, 26px);
+  padding: 0 var(--edge);
+  z-index: 200;
+  pointer-events: none;
+}
+.hdr > * { pointer-events: auto; }
+
+/* ── SVG rule line ─────────────────────────────────────────────────────── */
+.hdr__rule {
+  position: absolute; left: 0; right: 0; top: 0;
+  width: 100%; height: 100%;
+  color: #3a3a3a;
+  pointer-events: none;
+  overflow: visible;
+}
+.hdr__rulePath {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+}
+.is-header .hdr__rulePath {
+  transition: stroke-dashoffset 1.15s var(--ease-out);
+  stroke-dashoffset: 0;
 }
 
-/* ─── Logo ────────────────────────────────────────────── */
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* ── Wordmark ──────────────────────────────────────────────────────────── */
+.hdr__mark {
   text-decoration: none;
+  line-height: 1;
+  flex: 0 0 auto;
 }
-
-.logo-mark {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #00F0FF, #8B5CF6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: 1.1rem;
-  color: #000;
-  transition: transform 0.3s ease;
-}
-
-.nav-logo:hover .logo-mark {
-  transform: rotate(-5deg) scale(1.05);
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.logo-name {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  letter-spacing: 2px;
-  line-height: 1.2;
-}
-
-.logo-title {
-  font-size: 0.6rem;
-  color: #00F0FF;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-/* ─── Nav Links ───────────────────────────────────────── */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-link {
-  position: relative;
-  padding: 8px 14px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: #A0AEC0;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  border-radius: 8px;
-}
-
-.nav-link:hover {
-  color: var(--text-primary);
-}
-
-.nav-link-active {
-  color: #00F0FF;
-}
-
-.nav-link-indicator {
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #00F0FF;
-  box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
-}
-
-/* ─── CTA Button ──────────────────────────────────────── */
-.nav-cv-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 50px;
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  background: rgba(0, 240, 255, 0.06);
-  color: #00F0FF;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.nav-cv-btn:hover {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: rgba(0, 240, 255, 0.4);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
-  transform: translateY(-1px);
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-/* ─── Theme Toggle ────────────────────────────────────── */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: transparent;
-  color: var(--text-secondary, #B8B8B8);
-  cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-
-.theme-toggle:hover {
-  color: var(--primary, #00E5FF);
-  border-color: rgba(0, 229, 255, 0.3);
-  background: rgba(0, 229, 255, 0.06);
-}
-
-/* ─── Mobile ──────────────────────────────────────────── */
-.mobile-actions {
-  display: none;
-  align-items: center;
-  gap: 10px;
-}
-
-.mobile-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  cursor: pointer;
-  padding: 8px;
-}
-
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  padding: 16px 24px 24px;
-  background: rgba(3, 0, 20, 0.95);
-  backdrop-filter: blur(30px);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  overflow: hidden;
-}
-
-.mobile-link {
+.mark-word {
   display: block;
-  padding: 14px 0;
-  color: #A0AEC0;
-  font-size: 1rem;
+  font-family: var(--disp);
+  font-size: clamp(20px, 2.05vw, 34px);
+  letter-spacing: .012em;
+  /* Red grunge texture clipped to text — same distress as the big hero wordmark */
+  background-color: var(--ink);
+  background-image: url('/tex/grunge.png');
+  background-size: 260px;
+  background-blend-mode: multiply;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: saturate(1.35) contrast(1.16) brightness(1.18);
+}
+
+/* ── Divider ───────────────────────────────────────────────────────────── */
+.hdr__div {
+  width: 1px; height: 42%;
+  background: #3a3a3a;
+  flex: 0 0 auto;
+}
+
+/* ── Roles ─────────────────────────────────────────────────────────────── */
+.hdr__roles {
+  margin: 0;
+  display: grid;
+  gap: 1px;
+  font-size: clamp(7.5px, .61vw, 9.5px);
+  font-weight: 400;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--dim);
+  line-height: 1.42;
+  flex: 0 0 auto;
+}
+
+/* ── Desktop nav ───────────────────────────────────────────────────────── */
+.hdr__nav { margin-inline: auto; }
+.hdr__nav ul {
+  display: flex;
+  gap: clamp(16px, 2.4vw, 44px);
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.hdr__nav a {
+  position: relative;
+  display: block;
+  padding: 6px 0;
+  font-family: var(--ui);
+  font-size: clamp(9px, .72vw, 11.5px);
   font-weight: 500;
+  letter-spacing: .26em;
+  text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  transition: color 0.2s;
+  color: var(--dim);
+  transition: color .38s var(--ease-out);
+}
+/* Red dot under active/hovered item */
+.hdr__nav a::after {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: -3px;
+  width: 4px; height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: scale(0);
+  transition: transform .42s var(--ease-out);
+}
+.hdr__nav a:hover,
+.hdr__nav a:focus-visible { color: var(--paper); }
+.hdr__nav a.is-active { color: var(--paper); }
+.hdr__nav a.is-active::after,
+.hdr__nav a:hover::after { transform: scale(1); }
+
+/* ── Meta + pips ───────────────────────────────────────────────────────── */
+.hdr__meta {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  flex: 0 0 auto;
+}
+.hdr__metaLabel {
+  font-family: var(--ui);
+  font-size: clamp(7.5px, .6vw, 9.5px);
+  font-weight: 400;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.hdr__pips { display: flex; gap: 5px; }
+.hdr__pips i {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--ink);
+  opacity: .9;
 }
 
-.mobile-link:hover {
-  color: #00F0FF;
-}
+/* ── Burger (hidden on desktop) ────────────────────────────────────────── */
+.hdr__burger { display: none; }
 
-.mobile-cv-btn {
-  display: inline-flex;
-  align-items: center;
+/* ── Staggered entrance animations ─────────────────────────────────────── */
+.hdr__mark, .hdr__div, .hdr__roles, .hdr__nav li, .hdr__meta {
+  opacity: 0;
+  transform: translateY(-9px);
+}
+.is-header .hdr__mark,
+.is-header .hdr__div,
+.is-header .hdr__roles,
+.is-header .hdr__nav li,
+.is-header .hdr__meta {
+  opacity: 1;
+  transform: none;
+  transition: opacity .7s var(--ease-out), transform .8s var(--ease-out);
+}
+.is-header .hdr__mark   { transition-delay: .18s; }
+.is-header .hdr__div    { transition-delay: .26s; }
+.is-header .hdr__roles  { transition-delay: .30s; }
+.is-header .hdr__nav li { transition-delay: calc(.36s + var(--i) * .055s); }
+.is-header .hdr__meta   { transition-delay: .62s; }
+
+/* ==========================================================================
+   Mobile full-screen menu
+   ========================================================================== */
+.cine-menu {
+  position: fixed; inset: 0;
+  z-index: 180;
+  display: grid;
+  place-content: center;
   gap: 8px;
-  margin-top: 16px;
-  padding: 12px 24px;
-  border-radius: 50px;
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  background: rgba(0, 240, 255, 0.06);
-  color: #00F0FF;
-  font-weight: 600;
+  background: rgba(0, 0, 0, .95);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .45s ease, visibility .45s;
+}
+.cine-menu.is-menu { opacity: 1; visibility: visible; }
+.cine-menu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.cine-menu a {
+  display: block;
+  text-align: center;
   text-decoration: none;
+  font-family: var(--disp);
+  font-size: clamp(38px, 11vw, 64px);
+  line-height: 1.06;
+  color: var(--ink);
+  background-color: var(--ink);
+  background-image: url('/tex/grunge.png');
+  background-size: 300px;
+  background-blend-mode: multiply;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: saturate(1.3) contrast(1.12) brightness(1.15);
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .4s ease, transform .55s var(--ease-out);
+}
+.cine-menu a.is-active,
+.cine-menu a:hover { filter: saturate(1.5) contrast(1.2) brightness(1.4); }
+.cine-menu.is-menu a {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(.06s + var(--i, 0) * .05s);
+}
+.cine-menu__tag {
+  margin: 26px 0 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0;
+  transition: opacity .5s ease .3s;
+}
+.cine-menu.is-menu .cine-menu__tag { opacity: 1; }
+
+/* ==========================================================================
+   Mobile breakpoint — hide desktop nav, show burger
+   ========================================================================== */
+@media (max-width: 760px) {
+  .hdr { gap: 10px; }
+  .hdr__div, .hdr__roles, .hdr__meta { display: none; }
+  .hdr__nav { display: none; }
+  .hdr__burger {
+    display: grid;
+    gap: 5px;
+    margin-left: auto;
+    appearance: none; border: 0; background: none; padding: 6px 0;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .hdr__burger span {
+    display: block; width: 26px; height: 1.5px; background: var(--paper);
+    transition: transform .4s var(--ease-out);
+  }
+  .hdr__burger[aria-expanded="true"] span:first-child { transform: translateY(3.25px) rotate(45deg); }
+  .hdr__burger[aria-expanded="true"] span:last-child  { transform: translateY(-3.25px) rotate(-45deg); }
 }
 
-@media (max-width: 900px) {
-  .nav-links,
-  .nav-actions {
-    display: none;
-  }
-
-  .mobile-actions {
-    display: flex;
-  }
-
-  .mobile-toggle {
-    display: flex;
-  }
-
-  .mobile-menu {
-    display: flex;
-  }
-}
-
-@media (max-width: 380px) {
-  .logo-title {
-    display: none;
+@media (prefers-reduced-motion: reduce) {
+  .hdr__mark, .hdr__div, .hdr__roles, .hdr__nav li, .hdr__meta {
+    transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
   }
 }
