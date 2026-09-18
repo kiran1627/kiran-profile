@@ -345,6 +345,16 @@ const Projects = () => {
                   whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0, rotateY }}
                   viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: idx * 0.12 }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${project.title} details`}
+                  onClick={() => setActiveProject(project)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveProject(project);
+                    }
+                  }}
                 >
                   <span className="arc-card-index">{project.index}</span>
 
@@ -374,19 +384,16 @@ const Projects = () => {
                     <p className="arc-card-impact">{project.impact}</p>
 
                     <div className="arc-card-actions">
-                      <button
-                        type="button"
-                        className="arc-card-explore"
-                        onClick={() => setActiveProject(project)}
-                      >
+                      <span className="arc-card-explore" aria-hidden="true">
                         Explore <ExternalLink size={12} />
-                      </button>
+                      </span>
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noreferrer"
                         className="arc-card-repo"
                         aria-label={`${project.title} source repository`}
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <Github size={14} />
                       </a>

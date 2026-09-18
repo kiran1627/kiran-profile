@@ -124,6 +124,7 @@
 
 .arc-card {
   width: 100%;
+  cursor: pointer;
   transform-style: preserve-3d;
   display: grid;
   gap: 0;
@@ -151,9 +152,14 @@
 }
 
 .arc-card:hover,
-.arc-card:focus-within {
+.arc-card:focus-within,
+.arc-card:focus-visible {
   border-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0 0 55px rgba(216, 177, 131, 0.3), 0 40px 80px rgba(0, 0, 0, 0.7);
+}
+.arc-card:focus-visible {
+  outline: 2px solid rgba(216, 177, 131, 0.7);
+  outline-offset: 3px;
 }
 
 .arc-card-index {
