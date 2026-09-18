@@ -169,10 +169,9 @@ const Skills = () => {
             <path className="skills-energy-path skills-energy-path--c" d="M 500 60 Q 500 500 500 940" />
           </svg>
 
-          {/* Central backdrop: plain dark cinematic glow, no figure */}
+          {/* Central glow, no figure/backdrop panel */}
           <div className="skills-figure" aria-hidden="true">
             <div className="skills-figure-glow" />
-            <div className="skills-figure-backdrop" />
           </div>
 
           <motion.div

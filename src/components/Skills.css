@@ -176,18 +176,6 @@
 @media (prefers-reduced-motion: reduce) {
   .skills-figure-glow { animation: none; }
 }
-.skills-figure-backdrop {
-  position: relative;
-  width: min(260px, 60vw);
-  height: min(340px, 62vh);
-  max-height: 340px;
-  border-radius: 130px 130px 24px 24px;
-  border: 1px solid rgba(222, 27, 28, 0.35);
-  box-shadow: 0 0 60px rgba(222, 27, 28, 0.25), inset 0 0 40px rgba(0, 0, 0, 0.6);
-  background:
-    radial-gradient(ellipse at 50% 30%, rgba(222, 27, 28, 0.14) 0%, transparent 65%),
-    #050403;
-}
 
 /* ── Scatter container ────────────────────────────────────────────────── */
 .skills-scatter {
