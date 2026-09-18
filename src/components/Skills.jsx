@@ -157,6 +157,20 @@ const Skills = () => {
             <span className="floor-ring floor-ring--3" />
           </div>
 
+          {/* Traveling red energy lines, criss-crossing behind/around the figure */}
+          <svg className="skills-energy-lines" viewBox="0 0 1000 1000" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="skillsEnergyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#de1b1c" stopOpacity="0" />
+                <stop offset="50%" stopColor="#ff5a4d" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#de1b1c" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path className="skills-energy-path skills-energy-path--a" d="M 60 780 Q 500 500 940 220" />
+            <path className="skills-energy-path skills-energy-path--b" d="M 940 780 Q 500 500 60 220" />
+            <path className="skills-energy-path skills-energy-path--c" d="M 500 60 Q 500 500 500 940" />
+          </svg>
+
           {/* Central figure: Kiran's own footage, framed as a tall portal */}
           <div className="skills-figure" aria-hidden="true">
             <div className="skills-figure-glow" />
