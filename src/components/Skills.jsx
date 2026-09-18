@@ -10,8 +10,6 @@ import {
 } from 'react-icons/si';
 import './Skills.css';
 
-const skillsFigure = '/videos/skills-figure.mp4';
-
 // Every skill from the original grouped lists is preserved here, one tile
 // per skill. Skills with a real Simple Icons brand logo get that icon;
 // everything else (protocols, concepts, generic techniques with no brand
@@ -171,19 +169,10 @@ const Skills = () => {
             <path className="skills-energy-path skills-energy-path--c" d="M 500 60 Q 500 500 500 940" />
           </svg>
 
-          {/* Central figure: Kiran's own footage, framed as a tall portal */}
+          {/* Central backdrop: plain dark cinematic glow, no figure */}
           <div className="skills-figure" aria-hidden="true">
             <div className="skills-figure-glow" />
-            <div className="skills-figure-frame">
-              <video
-                src={skillsFigure}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="skills-figure-video"
-              />
-            </div>
+            <div className="skills-figure-backdrop" />
           </div>
 
           <motion.div
