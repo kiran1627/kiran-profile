@@ -26,17 +26,6 @@ const TIMELINE_DATA = [
     ],
   },
   {
-    id: 3,
-    year: '2025',
-    stage: 'Practice',
-    title: 'FinPilot',
-    subtitle: 'Multi-Agent Finance Platform',
-    bullets: [
-      'Architected a multi-agent finance platform with LangGraph',
-      'Built the FastAPI backend and Next.js client',
-    ],
-  },
-  {
     id: 4,
     year: '2026',
     stage: 'Next Chapter',
@@ -109,6 +98,7 @@ const YearCard = ({ item, index, total, active, onSelect }) => {
       >
         <span className="yr-card__shot" aria-hidden="true">
           <span className="yr-card__shot-glow" />
+          <span className="yr-card__shot-year">{item.year}</span>
         </span>
         <span className="yr-card__caption">
           <span className="yr-card__stage">{item.stage}</span>
@@ -122,6 +112,14 @@ const YearCard = ({ item, index, total, active, onSelect }) => {
             </svg>
           </span>
         )}
+
+        {/* Hover/focus reveal: the real bullet content, surfaced right on
+            the card instead of only in the detail panel below. */}
+        <span className="yr-card__hover-panel" aria-hidden="true">
+          <ul>
+            {item.bullets.map((b) => <li key={b}>{b}</li>)}
+          </ul>
+        </span>
       </button>
     </div>
   );

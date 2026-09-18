@@ -319,6 +319,7 @@ const Projects = () => {
           <span className="floor-ring floor-ring--3" />
         </div>
 
+        <div className={`projects-turntable${prefersReducedMotion ? ' no-spin' : ''}`}>
         <motion.div
           className="projects-arc"
           style={{
@@ -404,6 +405,7 @@ const Projects = () => {
             );
           })}
         </motion.div>
+        </div>
       </div>
 
       <AnimatePresence>

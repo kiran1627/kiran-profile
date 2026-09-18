@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Mail, Linkedin, Github, FileText, Phone, Send, User, MessageSquare } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { Mail, Linkedin, Github, FileText, Phone } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CinematicLayer from './CinematicLayer';
@@ -22,9 +22,6 @@ const CONTACT_LINKS = [
 const HEADLINE_WORDS = ["Let's", 'Build', 'Something'];
 
 const Contact = () => {
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(null);
   const headlineRef = useRef(null);
 
   useEffect(() => {
@@ -42,35 +39,6 @@ const Contact = () => {
       scrollTrigger: { trigger: root, start: 'top 85%', once: true },
     });
   }, []);
-
-  // Same submit logic/endpoint as before — restyled only.
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setStatus(null);
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formState),
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || 'Something went wrong. Please try again.');
-      }
-
-      setFormState({ name: '', email: '', message: '' });
-      setStatus({ type: 'success', text: "Message sent! I'll get back to you soon." });
-    } catch (err) {
-      setStatus({ type: 'error', text: err.message || 'Failed to send message. Please try again.' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e) => setFormState({ ...formState, [e.target.name]: e.target.value });
 
   return (
     <section id="contact" className={styles.contact}>
@@ -110,69 +78,22 @@ const Contact = () => {
             })}
           </div>
 
-          <div className={styles.formCard}>
-            <h3 className={styles.formTitle}>Send a Message</h3>
-            <p className={styles.formSub}>Fill out the form below and I&apos;ll get back to you as soon as possible.</p>
-
-            <form onSubmit={handleSubmit} noValidate>
-              <div className={styles.formGroup}>
-                <label htmlFor="contact-name" className={styles.srOnly}>Your Name</label>
-                <User size={16} className={styles.inputIcon} aria-hidden="true" />
-                <input
-                  id="contact-name"
-                  type="text"
-                  name="name"
-                  value={formState.name}
-                  onChange={handleChange}
-                  placeholder="Your Name"
-                  required
-                  autoComplete="name"
-                  className={styles.input}
-                />
+          <div className={styles.globeCard} aria-hidden="true">
+            <div className={styles.globeWrap}>
+              <div className={styles.globeCore} />
+              <div className={styles.globe}>
+                {[0, 30, 60, 90, 120, 150].map((deg) => (
+                  <span key={`ring-${deg}`} className={styles.globeRing} style={{ transform: `rotateY(${deg}deg)` }} />
+                ))}
+                {[-60, -30, 0, 30, 60].map((deg) => (
+                  <span key={`lat-${deg}`} className={styles.globeLat} style={{ transform: `rotateX(${deg}deg)` }} />
+                ))}
               </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="contact-email" className={styles.srOnly}>Your Email</label>
-                <Mail size={16} className={styles.inputIcon} aria-hidden="true" />
-                <input
-                  id="contact-email"
-                  type="email"
-                  name="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                  placeholder="Your Email"
-                  required
-                  autoComplete="email"
-                  className={styles.input}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="contact-message" className={styles.srOnly}>Your Message</label>
-                <MessageSquare size={16} className={`${styles.inputIcon} ${styles.textareaIcon}`} aria-hidden="true" />
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  value={formState.message}
-                  onChange={handleChange}
-                  placeholder="Your Message"
-                  required
-                  className={`${styles.input} ${styles.textarea}`}
-                  rows="5"
-                />
-              </div>
-
-              <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
-                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                <Send size={16} />
-              </button>
-
-              {status && (
-                <p role="status" className={`${styles.status} ${status.type === 'success' ? styles.statusSuccess : styles.statusError}`}>
-                  {status.text}
-                </p>
-              )}
-            </form>
+              <span className={`${styles.globeDot} ${styles.globeDotA}`} />
+              <span className={`${styles.globeDot} ${styles.globeDotB}`} />
+              <span className={`${styles.globeDot} ${styles.globeDotC}`} />
+            </div>
+            <p className={styles.globeCaption}>Open to opportunities, anywhere.</p>
           </div>
         </div>
       </div>

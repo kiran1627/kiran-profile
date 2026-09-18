@@ -7,7 +7,7 @@
 .blog-section {
   position: relative;
   width: 100%;
-  padding: clamp(80px, 12vh, 140px) 0;
+  padding: clamp(120px, 12vh, 160px) 0;
   background: #050403;
   overflow: hidden;
   z-index: 10;

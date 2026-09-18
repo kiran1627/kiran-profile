@@ -174,6 +174,7 @@ const Skills = () => {
             <div className="skills-figure-glow" />
           </div>
 
+          <div className={`skills-turntable${prefersReducedMotion ? ' no-spin' : ''}`}>
           <motion.div
             className="skills-scatter"
             style={{
@@ -208,6 +209,7 @@ const Skills = () => {
               );
             })}
           </motion.div>
+          </div>
         </div>
 
         {/* Mobile / reduced fallback: simple flowing pill grid */}

@@ -173,7 +173,7 @@
   position: relative;
   z-index: 4;
   padding: 0 var(--edge);
-  margin-top: clamp(10px, 2vh, 30px);
+  margin-top: clamp(70px, 9vh, 110px);
 }
 .chrono-arc {
   max-width: 1180px;
@@ -204,6 +204,7 @@
 }
 
 .yr-card {
+  position: relative;
   appearance: none;
   border: none;
   background: none;
@@ -238,11 +239,15 @@
 
 .yr-card__shot {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   aspect-ratio: 16 / 10;
   border-radius: 6px;
-  background: linear-gradient(150deg, #2a1c14, #0c0a08 70%);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,160,80,.14), transparent 55%),
+    linear-gradient(150deg, #2a1c14, #0c0a08 70%);
   margin-bottom: 8px;
   overflow: hidden;
 }
@@ -250,6 +255,63 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 30% 30%, rgba(255,160,80,.18), transparent 60%);
+}
+.yr-card__shot-year {
+  position: relative;
+  font-family: var(--disp, inherit);
+  font-size: clamp(28px, 5vw, 44px);
+  letter-spacing: .02em;
+  color: rgba(255, 170, 80, .16);
+  line-height: 1;
+}
+.yr-card.is-active .yr-card__shot-year { color: rgba(255, 170, 80, .3); }
+
+/* ── Hover/focus reveal panel: real bullet content surfaced on the card ── */
+.yr-card__hover-panel {
+  position: absolute;
+  inset: 8px;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(10,7,6,0) 0%, rgba(6,4,3,.94) 55%, rgba(6,4,3,.98) 100%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+}
+.yr-card:hover .yr-card__hover-panel,
+.yr-card:focus-visible .yr-card__hover-panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+.yr-card__hover-panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.yr-card__hover-panel li {
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(232, 226, 220, .85);
+  padding-left: 12px;
+  position: relative;
+}
+.yr-card__hover-panel li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .5em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 150, 70, .8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yr-card__hover-panel { transition: none; }
 }
 
 .yr-card__caption {
