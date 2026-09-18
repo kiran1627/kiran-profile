@@ -1,0 +1,124 @@
+.about {
+  position: relative;
+  padding: 8rem 1.5rem;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 60px rgba(255, 122, 61, 0.06) inset;
+  backdrop-filter: blur(14px);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 154, 90, 0.85);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.heading {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: #f5f1ea;
+  margin: 0 0 1.5rem;
+  font-weight: 700;
+}
+
+.paragraph {
+  color: rgba(245, 241, 234, 0.72);
+  line-height: 1.7;
+  margin: 0 0 1.1rem;
+  font-size: 1rem;
+}
+
+.focusTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.tag {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(255, 154, 90, 0.3);
+  color: rgba(255, 200, 160, 0.9);
+  background: rgba(255, 122, 61, 0.08);
+}
+
+.visual {
+  position: relative;
+  border-radius: 1.1rem;
+  overflow: hidden;
+  min-height: 320px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.visualImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.15) contrast(1.05);
+}
+
+.visualGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 20%, rgba(79, 180, 255, 0.25), transparent 60%);
+  pointer-events: none;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.stat {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.statNumber {
+  display: block;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff9a5a, #4fb4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.statLabel {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: rgba(245, 241, 234, 0.6);
+}
+
+@media (max-width: 860px) {
+  .card { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+  .stats { grid-template-columns: 1fr; }
+  .visual { min-height: 220px; }
+}

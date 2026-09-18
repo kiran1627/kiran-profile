@@ -63,21 +63,23 @@ const SKILL_TILES = [
 
 const GLOWS = ['red', 'amber', 'white'];
 
-// Deterministic scatter: arranged in a rough sphere/arc around the central
-// figure at varying depth, angle and rotation so cubes read as floating at
-// different distances rather than a flat grid.
+// Sunflower/phyllotaxis spiral: the golden-angle step plus a sqrt-growing
+// radius guarantees even spacing that never clusters, unlike a fixed-ring
+// layout where many tiles can land at similar angle+radius combinations.
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5)); // ~137.5deg
 const TILE_LAYOUT = SKILL_TILES.map((tile, i) => {
   const n = SKILL_TILES.length;
-  const ring = i % 3; // 0 = inner, 1 = mid, 2 = outer
-  const angle = (i / n) * Math.PI * 2 * 1.9 + ring * 0.6;
-  const radiusX = 260 + ring * 150;
-  const radiusY = 140 + ring * 70;
+  const r = Math.sqrt(i + 1) / Math.sqrt(n); // 0..1, grows sublinearly
+  const angle = i * GOLDEN_ANGLE;
+  const radiusX = 150 + r * 480;
+  const radiusY = 90 + r * 270;
   const translateX = Math.cos(angle) * radiusX;
-  const translateY = Math.sin(angle) * radiusY * 0.6 - 20 + (ring - 1) * 30;
-  const translateZ = -80 + ring * 90 + ((i * 37) % 60);
-  const rotateY = (translateX / radiusX) * 26;
-  const rotateX = -(translateY / radiusY) * 10;
-  const scale = 0.72 + ring * 0.14;
+  const translateY = Math.sin(angle) * radiusY - 10;
+  const depthBand = i % 3; // adds a little Z variety without affecting X/Y spacing
+  const translateZ = -100 + depthBand * 90;
+  const rotateY = (translateX / (150 + 480)) * 24;
+  const rotateX = -(translateY / (90 + 270)) * 9;
+  const scale = 0.72 + (1 - r) * 0.32;
   return {
     ...tile,
     glow: GLOWS[i % GLOWS.length],

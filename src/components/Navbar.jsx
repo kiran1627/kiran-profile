@@ -15,11 +15,20 @@ const Navbar = () => {
   const [ready, setReady]           = useState(false);
   const [activeSection, setActive]  = useState('hero');
   const [menuOpen, setMenuOpen]     = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
 
   // Trigger entrance animation shortly after mount
   useEffect(() => {
     const t = setTimeout(() => setReady(true), 200);
     return () => clearTimeout(t);
+  }, []);
+
+  // Shrink + blur once the page has scrolled past the hero
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   // Active section tracking
@@ -55,7 +64,7 @@ const Navbar = () => {
   return (
     <>
       {/* ── Main header ── */}
-      <header className={`hdr${ready ? ' is-header' : ''}`} id="hdr" aria-label="Primary navigation">
+      <header className={`hdr${ready ? ' is-header' : ''}${scrolled ? ' is-scrolled' : ''}`} id="hdr" aria-label="Primary navigation">
         {/* Animated rule line */}
         <svg className="hdr__rule" aria-hidden="true" preserveAspectRatio="none">
           <polyline className="hdr__rulePath" fill="none" stroke="currentColor" strokeWidth="1.25"

@@ -1,7 +1,7 @@
 'use client';
 
 import Navbar from '../src/components/Navbar';
-import Hero from '../src/components/Hero';
+import VideoIntro from '../src/components/VideoIntro';
 import About from '../src/components/About';
 import Timeline from '../src/components/Timeline';
 import Footer from '../src/components/Footer';
@@ -17,7 +17,7 @@ export default function Home() {
     <div className="app-container">
       <Navbar />
       <main>
-        <Hero />
+        <VideoIntro />
         <About />
         <Timeline />
         <Projects />
