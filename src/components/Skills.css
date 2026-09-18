@@ -14,6 +14,68 @@
   align-items: center;
 }
 
+.skills-orbit-accent {
+  position: absolute;
+  top: 50%;
+  right: -140px;
+  transform: translateY(-50%);
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 150, 80, 0.14);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.skills-orbit-accent::before,
+.skills-orbit-accent::after {
+  content: '';
+  position: absolute;
+  inset: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(79, 168, 255, 0.1);
+}
+
+.skills-orbit-accent::before {
+  inset: 0;
+  border-color: rgba(255, 150, 80, 0.2);
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 138, 61, 0) 0%,
+    rgba(255, 138, 61, 0.35) 8%,
+    rgba(255, 138, 61, 0) 22%,
+    rgba(255, 138, 61, 0) 100%
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  animation: skillsRingSpin 16s linear infinite;
+}
+
+.skills-orbit-accent::after {
+  animation: skillsRingSpinReverse 22s linear infinite;
+}
+
+@keyframes skillsRingSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes skillsRingSpinReverse {
+  to { transform: rotate(-360deg); }
+}
+
+@media (max-width: 900px) {
+  .skills-orbit-accent {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-orbit-accent::before,
+  .skills-orbit-accent::after {
+    animation: none;
+  }
+}
+
 .skills-flow-container {
   display: flex;
   flex-direction: column;

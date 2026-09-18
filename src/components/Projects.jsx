@@ -215,17 +215,33 @@ const Projects = () => {
 
                     <div className="project-workflow-card glass-panel-premium">
                       <h4>PIPELINE WORKFLOW</h4>
-                      <div className="workflow-flow">
+                      <motion.div
+                        className="workflow-flow"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: '-80px' }}
+                        variants={{
+                          hidden: {},
+                          visible: { transition: { staggerChildren: 0.1 } },
+                        }}
+                      >
                         {project.workflow.map((item) => (
-                          <div key={item.step} className="workflow-step">
+                          <motion.div
+                            key={item.step}
+                            className="workflow-step"
+                            variants={{
+                              hidden: { opacity: 0, x: -16 },
+                              visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                            }}
+                          >
                             <span className="workflow-step-label">{item.step}</span>
                             <div>
                               <strong>{item.title}</strong>
                               <p>{item.desc}</p>
                             </div>
-                          </div>
+                          </motion.div>
                         ))}
-                      </div>
+                      </motion.div>
                     </div>
 
                     <div className="project-footer-grid">
@@ -239,22 +255,55 @@ const Projects = () => {
                       </div>
                       <div className="project-stack-card glass-panel-premium">
                         <span>TECH STACK</span>
-                        <div className="project-tech-tags">
+                        <motion.div
+                          className="project-tech-tags"
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true, margin: '-80px' }}
+                          variants={{
+                            hidden: {},
+                            visible: { transition: { staggerChildren: 0.05 } },
+                          }}
+                        >
                           {project.tech.map((tech) => (
-                            <span key={tech} className="project-tech-pill">{tech}</span>
+                            <motion.span
+                              key={tech}
+                              className="project-tech-pill"
+                              variants={{
+                                hidden: { opacity: 0, scale: 0.85 },
+                                visible: { opacity: 1, scale: 1, transition: { duration: 0.35 } },
+                              }}
+                              whileHover={{ y: -2, scale: 1.05 }}
+                            >
+                              {tech}
+                            </motion.span>
                           ))}
-                        </div>
+                        </motion.div>
                       </div>
                     </div>
 
                     <div className="project-action-row">
-                      <a href={project.github} target="_blank" rel="noreferrer" className="project-action-btn">
+                      <motion.a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-action-btn"
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.96 }}
+                      >
                         <Github size={14} /> View Repository
-                      </a>
+                      </motion.a>
                       {project.live && project.live !== '#' && (
-                        <a href={project.live} target="_blank" rel="noreferrer" className="project-action-btn project-action-btn-primary">
+                        <motion.a
+                          href={project.live}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="project-action-btn project-action-btn-primary"
+                          whileHover={{ y: -2 }}
+                          whileTap={{ scale: 0.96 }}
+                        >
                           <ExternalLink size={14} /> Live Demo
-                        </a>
+                        </motion.a>
                       )}
                     </div>
                   </div>

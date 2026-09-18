@@ -30,6 +30,7 @@ const SKILL_GROUPS = [
 const Skills = () => {
   return (
     <section id="skills" className="skills-orbit-section">
+      <div className="skills-orbit-accent" aria-hidden="true" />
       <div className="section-container skills-flow-container">
         <motion.div
           className="section-header-cinematic"

@@ -1,7 +1,9 @@
 'use client';
 
 import Navbar from '../src/components/Navbar';
-import Hero from '../src/components/Hero';
+import ScrollProgress from '../src/components/ScrollProgress';
+import VideoIntro from '../src/components/VideoIntro';
+import TechUniverse from '../src/components/TechUniverse';
 import About from '../src/components/About';
 import Timeline from '../src/components/Timeline';
 import Footer from '../src/components/Footer';
@@ -15,9 +17,11 @@ import Blog from '../src/components/Blog';
 export default function Home() {
   return (
     <div className="app-container">
+      <ScrollProgress />
       <Navbar />
       <main>
-        <Hero />
+        <VideoIntro />
+        <TechUniverse />
         <About />
         <Timeline />
         <Projects />
