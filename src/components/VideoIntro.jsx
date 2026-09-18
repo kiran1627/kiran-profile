@@ -10,8 +10,11 @@ import styles from './VideoIntro.module.css';
  * glow scrim, and a GSAP power-eased intro reveal for the headline.
  * Replaces the previous canvas-driven cine-hero-engine Hero.
  *
- * The video starts muted because browsers block autoplay-with-sound;
- * a toggle lets the visitor opt into audio after the page has loaded.
+ * Tries to autoplay WITH sound first; browsers that block that (most,
+ * on a first visit) fall back to a muted autoplay, and the toggle lets
+ * the visitor opt into audio manually. The video plays through once
+ * (no loop) and pauses whenever the hero scrolls out of view, resuming
+ * from where it left off when it scrolls back into view.
  */
 const VideoIntro = () => {
   const videoRef = useRef(null);
@@ -26,6 +29,39 @@ const VideoIntro = () => {
     if (!next) video.play().catch(() => {});
     setMuted(next);
   };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = false;
+    video.play()
+      .then(() => setMuted(false))
+      .catch(() => {
+        video.muted = true;
+        setMuted(true);
+        video.play().catch(() => {});
+      });
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const root = rootRef.current;
+    if (!video || !root) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -66,9 +102,7 @@ const VideoIntro = () => {
           ref={videoRef}
           className={styles.video}
           src="/hero-v2.mp4"
-          autoPlay
-          muted
-          loop
+          muted={muted}
           playsInline
           preload="auto"
           aria-hidden="true"
