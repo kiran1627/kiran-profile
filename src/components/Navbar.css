@@ -120,10 +120,10 @@
   transition: transform .42s var(--ease-out);
 }
 .hdr__nav a:hover,
-.hdr__nav a:focus-visible { color: var(--paper); }
+.hdr__nav a:focus-visible { color: var(--paper); text-shadow: 0 0 14px rgba(222, 27, 28, 0.45); }
 .hdr__nav a.is-active { color: var(--paper); }
 .hdr__nav a.is-active::after,
-.hdr__nav a:hover::after { transform: scale(1); }
+.hdr__nav a:hover::after { transform: scale(1); box-shadow: 0 0 8px rgba(222, 27, 28, 0.7); }
 
 /* ── Meta + pips ───────────────────────────────────────────────────────── */
 .hdr__meta {

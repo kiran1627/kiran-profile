@@ -1,12 +1,14 @@
 /* ═══════════════════════════════════════════════════════════
-   SECTION 6: BLOGS — Premium Article Cards
+   BLOGS — cinematic article cards
+   Matches Projects.css's arc-card palette (dark glass, red/gold/
+   white glow variants, Anton titles, Oswald meta) in a flat grid.
    ═══════════════════════════════════════════════════════════ */
 
 .blog-section {
   position: relative;
   width: 100%;
-  padding: 140px 0;
-  background: var(--bg-secondary);
+  padding: clamp(80px, 12vh, 140px) 0;
+  background: #050403;
   overflow: hidden;
   z-index: 10;
 }
@@ -32,13 +34,35 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.03) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(222, 27, 28, 0.05) 0%, transparent 70%);
   filter: blur(80px);
   pointer-events: none;
   z-index: 1;
 }
 
-/* Blog Cards Grid */
+/* ── HUD corner labels ────────────────────────────────────────────────── */
+.bl-label {
+  position: absolute;
+  margin: 0;
+  font-family: var(--ui);
+  font-size: clamp(8px, .72vw, 12px);
+  font-weight: 400;
+  line-height: 2.05;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: rgba(232, 226, 220, .5);
+  pointer-events: none;
+  z-index: 6;
+}
+.bl-label--tl { top: clamp(24px, 5vh, 50px); left: clamp(20px, 3vw, 52px); }
+.bl-label--tr { top: clamp(24px, 5vh, 50px); right: clamp(20px, 3vw, 52px); text-align: right; }
+.bl-label--tr b { color: rgba(216, 177, 131, .85); font-weight: 500; }
+
+@media (max-width: 760px) {
+  .bl-label { display: none; }
+}
+
+/* ── Blog cards grid ──────────────────────────────────────────────────── */
 .blog-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -47,22 +71,39 @@
   z-index: 5;
 }
 
-/* Premium Article Card */
+/* ── Article card ─────────────────────────────────────────────────────── */
 .blog-card {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  background: rgba(10, 8, 6, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.blog-card:hover {
+.blog-card--red {
+  border-color: rgba(222, 27, 28, 0.45);
+  box-shadow: 0 0 32px rgba(222, 27, 28, 0.16), 0 30px 70px rgba(0, 0, 0, 0.6);
+}
+.blog-card--gold {
+  border-color: rgba(216, 177, 131, 0.5);
+  box-shadow: 0 0 32px rgba(216, 177, 131, 0.18), 0 30px 70px rgba(0, 0, 0, 0.6);
+}
+.blog-card--white {
+  border-color: rgba(240, 240, 236, 0.35);
+  box-shadow: 0 0 32px rgba(240, 240, 236, 0.12), 0 30px 70px rgba(0, 0, 0, 0.6);
+}
+
+.blog-card:hover,
+.blog-card:focus-within {
   transform: translateY(-8px);
-  border-color: var(--text-muted);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 45px rgba(216, 177, 131, 0.28), 0 40px 80px rgba(0, 0, 0, 0.7);
 }
 
 .blog-card-image-wrapper {
@@ -86,7 +127,7 @@
 .blog-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(3, 0, 20, 0.9), transparent);
+  background: linear-gradient(to top, rgba(5, 4, 3, 0.95), transparent);
   display: flex;
   align-items: flex-end;
   padding: 20px;
@@ -102,11 +143,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-heading);
+  font-family: var(--disp);
   font-size: 0.85rem;
-  font-weight: 600;
-  color: #00E5FF;
-  letter-spacing: 1px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #d8b183;
 }
 
 .read-more-btn .arrow-icon {
@@ -118,7 +159,7 @@
 }
 
 .blog-card-content {
-  padding: 24px;
+  padding: 22px 22px 24px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -129,10 +170,11 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.5px;
+  font-family: var(--ui);
+  font-size: 0.72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(232, 226, 220, 0.55);
 }
 
 .blog-card-read-time {
@@ -142,23 +184,24 @@
 }
 
 .blog-card-title {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-family: var(--disp);
+  font-size: 1.2rem;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #f2e8dc;
   margin-bottom: 10px;
-  line-height: 1.4;
+  line-height: 1.35;
   transition: color 0.3s ease;
 }
 
 .blog-card:hover .blog-card-title {
-  color: #00E5FF;
+  color: #d8b183;
 }
 
 .blog-card-desc {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-family: var(--ui);
+  font-size: 0.88rem;
+  color: rgba(232, 226, 220, 0.68);
   line-height: 1.6;
   margin-bottom: 20px;
   flex: 1;
@@ -171,21 +214,32 @@
 }
 
 .blog-tag {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 4px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--ui);
+  font-size: 0.68rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgba(232, 226, 220, 0.65);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-card,
+  .blog-card-image,
+  .blog-card-overlay,
+  .read-more-btn .arrow-icon,
+  .blog-card-title {
+    transition: none !important;
+  }
 }
 
 @media (max-width: 768px) {
   .blog-section {
     padding: 80px 0;
   }
-  
+
   .blog-cards-grid {
     grid-template-columns: 1fr;
   }

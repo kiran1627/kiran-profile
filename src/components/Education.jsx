@@ -20,6 +20,19 @@ const CERTIFICATIONS = [
 const Education = () => {
   return (
     <section id="education" className="education-section">
+      <div className="ed-label ed-label--tl" aria-hidden="true">
+        Credentials<br />Foundation<br />Growth
+      </div>
+      <div className="ed-label ed-label--tr" aria-hidden="true">
+        Learn<br /><b>Certify · Apply</b>
+      </div>
+      <div className="ed-label ed-label--bl" aria-hidden="true">
+        Est. 2026
+      </div>
+      <div className="ed-label ed-label--br" aria-hidden="true">
+        Knowledge<br />Proof<br />Practice
+      </div>
+
       <div className="section-container">
         <motion.div
           className="section-header-cinematic"
@@ -44,7 +57,7 @@ const Education = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="education-icon">
-            <GraduationCap size={22} />
+            <GraduationCap size={22} aria-hidden="true" />
           </div>
           <div className="education-primary-body">
             <h3 className="education-degree">{EDUCATION.degree}</h3>
@@ -68,7 +81,7 @@ const Education = () => {
           <div className="certifications-list">
             {CERTIFICATIONS.map((cert) => (
               <div key={cert.name} className="certification-chip">
-                <BadgeCheck size={14} />
+                <BadgeCheck size={14} aria-hidden="true" />
                 <span>{cert.name}</span>
               </div>
             ))}

@@ -30,6 +30,13 @@ const Blog = () => {
       <div className="blog-grid-overlay" />
       <div className="blog-glow-orb" />
 
+      <div className="bl-label bl-label--tl" aria-hidden="true">
+        Notes<br />Field Logs<br />Writeups
+      </div>
+      <div className="bl-label bl-label--tr" aria-hidden="true">
+        Read<br /><b>Learn · Build</b>
+      </div>
+
       <div className="section-container">
         {/* Section Header */}
         <div className="section-header-cinematic">
@@ -52,44 +59,47 @@ const Blog = () => {
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
         >
-          {blogs.map((blog, i) => (
-            <motion.a
-              key={blog.slug}
-              href={`/blog/${blog.slug}`}
-              className="blog-card glass-panel-premium"
-              variants={cardVariants}
-            >
-              <div className="blog-card-image-wrapper">
-                <img src={blog.image} alt={blog.title} className="blog-card-image" />
-                <div className="blog-card-overlay">
-                  <div className="read-more-btn">
-                    <span>Read More</span>
-                    <ArrowRight size={14} className="arrow-icon" />
+          {blogs.map((blog, i) => {
+            const glow = ['red', 'gold', 'white'][i % 3];
+            return (
+              <motion.a
+                key={blog.slug}
+                href={`/blog/${blog.slug}`}
+                className={`blog-card blog-card--${glow}`}
+                variants={cardVariants}
+              >
+                <div className="blog-card-image-wrapper">
+                  <img src={blog.image} alt={blog.title} className="blog-card-image" />
+                  <div className="blog-card-overlay">
+                    <div className="read-more-btn">
+                      <span>Read More</span>
+                      <ArrowRight size={14} className="arrow-icon" aria-hidden="true" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="blog-card-content">
-                <div className="blog-card-meta">
-                  <span className="blog-card-date">{blog.date}</span>
-                  <span className="blog-card-read-time">
-                    <Clock size={12} /> {blog.readTime}
-                  </span>
-                </div>
-                
-                <h3 className="blog-card-title">{blog.title}</h3>
-                <p className="blog-card-desc">{blog.desc}</p>
-                
-                <div className="blog-card-tags">
-                  {blog.tags.map((tag, idx) => (
-                    <span key={idx} className="blog-tag">
-                      {tag}
+                <div className="blog-card-content">
+                  <div className="blog-card-meta">
+                    <span className="blog-card-date">{blog.date}</span>
+                    <span className="blog-card-read-time">
+                      <Clock size={12} aria-hidden="true" /> {blog.readTime}
                     </span>
-                  ))}
+                  </div>
+
+                  <h3 className="blog-card-title">{blog.title}</h3>
+                  <p className="blog-card-desc">{blog.desc}</p>
+
+                  <div className="blog-card-tags">
+                    {blog.tags.map((tag, idx) => (
+                      <span key={idx} className="blog-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.a>
-          ))}
+              </motion.a>
+            );
+          })}
         </motion.div>
       </div>
     </section>
