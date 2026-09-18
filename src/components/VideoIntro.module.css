@@ -148,6 +148,35 @@
   50% { opacity: 1; }
 }
 
+.soundToggle {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  color: rgba(245, 241, 234, 0.85);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+.soundToggle:hover,
+.soundToggle:focus-visible {
+  border-color: rgba(255, 154, 90, 0.6);
+  background: rgba(0, 0, 0, 0.55);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .soundToggle { right: 1rem; bottom: 1rem; width: 36px; height: 36px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scrollLine { animation: none; }
 }

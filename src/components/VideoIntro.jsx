@@ -1,17 +1,31 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { Volume2, VolumeX } from 'lucide-react';
 import styles from './VideoIntro.module.css';
 
 /**
  * VideoIntro — cinematic hero: full-bleed background video, warm/blue
  * glow scrim, and a GSAP power-eased intro reveal for the headline.
  * Replaces the previous canvas-driven cine-hero-engine Hero.
+ *
+ * The video starts muted because browsers block autoplay-with-sound;
+ * a toggle lets the visitor opt into audio after the page has loaded.
  */
 const VideoIntro = () => {
   const videoRef = useRef(null);
   const rootRef = useRef(null);
+  const [muted, setMuted] = useState(true);
+
+  const toggleSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const next = !muted;
+    video.muted = next;
+    if (!next) video.play().catch(() => {});
+    setMuted(next);
+  };
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -90,6 +104,16 @@ const VideoIntro = () => {
       >
         <span className={styles.scrollLine} />
         SCROLL
+      </button>
+
+      <button
+        className={styles.soundToggle}
+        onClick={toggleSound}
+        aria-label={muted ? 'Unmute background video' : 'Mute background video'}
+        aria-pressed={!muted}
+        type="button"
+      >
+        {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
       </button>
     </section>
   );
