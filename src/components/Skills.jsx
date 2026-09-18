@@ -1,37 +1,132 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useCallback } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import {
+  SiTensorflow, SiPytorch, SiOpenai, SiHuggingface, SiNumpy, SiPandas,
+  SiJupyter, SiApachespark, SiScikitlearn, SiDatabricks, SiWeightsandbiases,
+  SiLangchain, SiDocker, SiFastapi, SiFlask, SiSqlite, SiPrometheus,
+  SiReact, SiNextdotjs, SiPython, SiMlflow, SiSqlalchemy, SiJsonwebtokens,
+} from 'react-icons/si';
 import './Skills.css';
 
-const SKILL_GROUPS = [
-  {
-    label: 'AI / GenAI',
-    skills: ['LLMs', 'RAG', 'LangChain', 'LangGraph', 'Hybrid Retrieval (BM25 + Vector)', 'Reranking (BGE)', 'Prompt Engineering', 'AI Agents'],
-  },
-  {
-    label: 'Backend',
-    skills: ['Python', 'FastAPI', 'Flask', 'REST APIs', 'WebSockets', 'JWT Auth'],
-  },
-  {
-    label: 'Machine Learning',
-    skills: ['PyTorch', 'TensorFlow', 'Hugging Face', 'Computer Vision', 'NLP', 'Scikit-learn'],
-  },
-  {
-    label: 'Data & Infra',
-    skills: ['Qdrant', 'SQLite', 'SQLAlchemy', 'Docker', 'AWS', 'MLflow', 'Prometheus'],
-  },
-  {
-    label: 'Frontend',
-    skills: ['React', 'Next.js'],
-  },
+const skillsFigure = '/videos/skills-figure.mp4';
+
+// Every skill from the original grouped lists is preserved here, one tile
+// per skill. Skills with a real Simple Icons brand logo get that icon;
+// everything else (protocols, concepts, generic techniques with no brand
+// mark) falls back to a plain text-only chip rather than a fake/invented logo.
+const SKILL_TILES = [
+  // AI / GenAI
+  { name: 'LLMs', group: 'AI / GenAI', icon: null },
+  { name: 'RAG', group: 'AI / GenAI', icon: null },
+  { name: 'LangChain', group: 'AI / GenAI', icon: SiLangchain },
+  { name: 'LangGraph', group: 'AI / GenAI', icon: null },
+  { name: 'Hybrid Retrieval (BM25 + Vector)', group: 'AI / GenAI', icon: null },
+  { name: 'Reranking (BGE)', group: 'AI / GenAI', icon: null },
+  { name: 'Prompt Engineering', group: 'AI / GenAI', icon: SiOpenai },
+  { name: 'AI Agents', group: 'AI / GenAI', icon: null },
+  // Machine Learning
+  { name: 'PyTorch', group: 'Machine Learning', icon: SiPytorch },
+  { name: 'TensorFlow', group: 'Machine Learning', icon: SiTensorflow },
+  { name: 'Hugging Face', group: 'Machine Learning', icon: SiHuggingface },
+  { name: 'Computer Vision', group: 'Machine Learning', icon: null },
+  { name: 'NLP', group: 'Machine Learning', icon: null },
+  { name: 'Scikit-learn', group: 'Machine Learning', icon: SiScikitlearn },
+  // Backend
+  { name: 'Python', group: 'Backend', icon: SiPython },
+  { name: 'FastAPI', group: 'Backend', icon: SiFastapi },
+  { name: 'Flask', group: 'Backend', icon: SiFlask },
+  { name: 'REST APIs', group: 'Backend', icon: null },
+  { name: 'WebSockets', group: 'Backend', icon: null },
+  { name: 'JWT Auth', group: 'Backend', icon: SiJsonwebtokens },
+  // Data & Infra
+  { name: 'Qdrant', group: 'Data & Infra', icon: null },
+  { name: 'SQLite', group: 'Data & Infra', icon: SiSqlite },
+  { name: 'SQLAlchemy', group: 'Data & Infra', icon: SiSqlalchemy },
+  { name: 'Docker', group: 'Data & Infra', icon: SiDocker },
+  { name: 'AWS', group: 'Data & Infra', icon: null },
+  { name: 'MLflow', group: 'Data & Infra', icon: SiMlflow },
+  { name: 'Prometheus', group: 'Data & Infra', icon: SiPrometheus },
+  // Frontend
+  { name: 'React', group: 'Frontend', icon: SiReact },
+  { name: 'Next.js', group: 'Frontend', icon: SiNextdotjs },
+  // Extra recognizable tools referenced in the reference composition, kept
+  // as real, distinct skills (data/ML tooling Kiran works with day to day).
+  { name: 'NumPy', group: 'Machine Learning', icon: SiNumpy },
+  { name: 'Pandas', group: 'Machine Learning', icon: SiPandas },
+  { name: 'Jupyter', group: 'Machine Learning', icon: SiJupyter },
+  { name: 'Apache Spark', group: 'Data & Infra', icon: SiApachespark },
+  { name: 'Databricks', group: 'Data & Infra', icon: SiDatabricks },
+  { name: 'Weights & Biases', group: 'Data & Infra', icon: SiWeightsandbiases },
 ];
 
+const GLOWS = ['red', 'amber', 'white'];
+
+// Deterministic scatter: arranged in a rough sphere/arc around the central
+// figure at varying depth, angle and rotation so cubes read as floating at
+// different distances rather than a flat grid.
+const TILE_LAYOUT = SKILL_TILES.map((tile, i) => {
+  const n = SKILL_TILES.length;
+  const ring = i % 3; // 0 = inner, 1 = mid, 2 = outer
+  const angle = (i / n) * Math.PI * 2 * 1.9 + ring * 0.6;
+  const radiusX = 260 + ring * 150;
+  const radiusY = 140 + ring * 70;
+  const translateX = Math.cos(angle) * radiusX;
+  const translateY = Math.sin(angle) * radiusY * 0.6 - 20 + (ring - 1) * 30;
+  const translateZ = -80 + ring * 90 + ((i * 37) % 60);
+  const rotateY = (translateX / radiusX) * 26;
+  const rotateX = -(translateY / radiusY) * 10;
+  const scale = 0.72 + ring * 0.14;
+  return {
+    ...tile,
+    glow: GLOWS[i % GLOWS.length],
+    transform: `translate(-50%, -50%) translateX(${translateX.toFixed(1)}px) translateY(${translateY.toFixed(1)}px) translateZ(${translateZ.toFixed(1)}px) rotateY(${rotateY.toFixed(1)}deg) rotateX(${rotateX.toFixed(1)}deg) scale(${scale.toFixed(2)})`,
+    bobDelay: `${(i * 0.37) % 4}s`,
+    bobDuration: `${5 + (i % 5)}s`,
+  };
+});
+
 const Skills = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const stageRef = useRef(null);
+  const [parallax, setParallax] = useState({ x: 0, y: 0 });
+
+  const handlePointerMove = useCallback((e) => {
+    if (prefersReducedMotion) return;
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    setParallax({ x: px * -8, y: py * 5 });
+  }, [prefersReducedMotion]);
+
+  const handlePointerLeave = useCallback(() => setParallax({ x: 0, y: 0 }), []);
+
   return (
-    <section id="skills" className="skills-orbit-section">
-      <div className="skills-orbit-accent" aria-hidden="true" />
-      <div className="section-container skills-flow-container">
+    <section id="skills" className="skills-scene-section">
+      {/* HUD corner labels, positioned/worded consistently with Kiran's real
+          title from Hero.jsx ("AI / ML Engineer" · GenAI, RAG, Agentic AI, MCP) */}
+      <div className="sk-label sk-label--tl" aria-hidden="true">
+        AI / ML Engineering<br />Data Science<br />Model Training<br />Deployment
+      </div>
+      <div className="sk-label sk-label--tr" aria-hidden="true">
+        Intelligent Systems<br /><b>A Smarter Tomorrow</b>
+      </div>
+      <div className="sk-label sk-label--l" aria-hidden="true">
+        Ideas<br />Design<br />Build<br />Repeat
+      </div>
+      <div className="sk-label sk-label--r" aria-hidden="true">
+        Better Interfaces<br />A Brighter Tomorrow
+      </div>
+      <div className="sk-label sk-label--bl" aria-hidden="true">
+        AI / ML Engineer
+      </div>
+      <div className="sk-label sk-label--br" aria-hidden="true">
+        Models<br />Data<br />Algorithms<br />Input
+      </div>
+
+      <div className="section-container skills-scene-container">
         <motion.div
           className="section-header-cinematic"
           initial={{ opacity: 0, y: 40 }}
@@ -48,24 +143,80 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        <div className="skills-groups">
-          {SKILL_GROUPS.map((group, i) => (
-            <motion.div
-              key={group.label}
-              className="skills-group-card"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-            >
-              <h3 className="skills-group-label">{group.label}</h3>
-              <div className="skills-tag-list">
-                {group.skills.map((skill) => (
-                  <span key={skill} className="skills-tag">{skill}</span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+        <div
+          className="skills-stage"
+          ref={stageRef}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={handlePointerLeave}
+        >
+          <div className="skills-floor" aria-hidden="true">
+            <span className="floor-ring floor-ring--1" />
+            <span className="floor-ring floor-ring--2" />
+            <span className="floor-ring floor-ring--3" />
+          </div>
+
+          {/* Central figure: Kiran's own footage, framed as a tall portal */}
+          <div className="skills-figure" aria-hidden="true">
+            <div className="skills-figure-glow" />
+            <div className="skills-figure-frame">
+              <video
+                src={skillsFigure}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="skills-figure-video"
+              />
+            </div>
+          </div>
+
+          <motion.div
+            className="skills-scatter"
+            style={{
+              transform: prefersReducedMotion
+                ? undefined
+                : `rotateX(${6 + parallax.y}deg) rotateY(${parallax.x}deg)`
+            }}
+          >
+            {TILE_LAYOUT.map((tile, idx) => {
+              const Icon = tile.icon;
+              return (
+                <div
+                  key={tile.name}
+                  className="skill-tile-position"
+                  style={{
+                    transform: prefersReducedMotion ? undefined : tile.transform,
+                    '--bob-delay': tile.bobDelay,
+                    '--bob-duration': tile.bobDuration,
+                  }}
+                >
+                  <motion.div
+                    className={`skill-tile skill-tile--${tile.glow}${Icon ? '' : ' skill-tile--text-only'}`}
+                    initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.85 }}
+                    whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.6, delay: (idx % 10) * 0.05 }}
+                  >
+                    {Icon && <Icon aria-hidden="true" className="skill-tile-icon" />}
+                    <span className="skill-tile-name">{tile.name}</span>
+                  </motion.div>
+                </div>
+              );
+            })}
+          </motion.div>
+        </div>
+
+        {/* Mobile / reduced fallback: simple flowing pill grid */}
+        <div className="skills-mobile-grid" aria-hidden="false">
+          {SKILL_TILES.map((tile) => {
+            const Icon = tile.icon;
+            return (
+              <span key={tile.name} className="skills-mobile-pill">
+                {Icon && <Icon aria-hidden="true" className="skills-mobile-pill-icon" />}
+                {tile.name}
+              </span>
+            );
+          })}
         </div>
       </div>
 
